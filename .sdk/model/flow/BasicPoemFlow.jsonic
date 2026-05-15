@@ -1,0 +1,44 @@
+# BasicPoemFlow
+
+main: kit: flow: BasicPoemFlow:
+{
+  entity: "poem",
+  kind: "basic",
+  name: "BasicPoemFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "poem_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "poem_ref01",
+        srcdatavar: "poem_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "poem01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-poem_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicPoemFlow"
+}

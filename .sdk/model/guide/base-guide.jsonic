@@ -1,0 +1,21 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 1
+  metrics: count: path: 3
+  metrics: count: method: 3
+
+  entity: poem: {
+    path: "/poems": {
+      op: list: method: *GET
+    }
+    path: "/poems/{volume}": {
+      rename: param: "volume": *"id"
+      op: load: method: *GET
+    }
+    path: "/random": {
+      op: list: method: *GET
+    }
+  }
+
+}

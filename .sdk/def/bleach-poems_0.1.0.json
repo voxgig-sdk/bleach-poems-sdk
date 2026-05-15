@@ -1,0 +1,204 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Bleach Poems API",
+    "description": "This API provides a JSON representation of all poems from the Bleach series, encompassing volumes 1 to 74. Additionally, it features a simple web server that allows users to access poems by volume or retrieve a random poem.",
+    "version": "2.0.0",
+    "contact": {
+      "url": "https://codeberg.org/b_n_b/bleach-poems"
+    },
+    "license": {
+      "name": "All rights to VIZ",
+      "url": "https://codeberg.org/b_n_b/bleach-poems"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://bleach-poems.onrender.com",
+      "description": "Public instance"
+    },
+    {
+      "url": "http://localhost:8080",
+      "description": "Local development server"
+    }
+  ],
+  "paths": {
+    "/poems": {
+      "get": {
+        "summary": "Get all poems",
+        "description": "Returns all poems from Bleach volumes 1-74",
+        "operationId": "getAllPoems",
+        "responses": {
+          "200": {
+            "description": "Successful response containing all poems",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PoemsResponse"
+                },
+                "example": {
+                  "poems": [
+                    {
+                      "volume": 1,
+                      "title": "Death and Strawberry",
+                      "lines": [
+                        "We fear that which we cannot see"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/poems/{volume}": {
+      "get": {
+        "summary": "Get poem by volume",
+        "description": "Returns the poem from a specific Bleach volume",
+        "operationId": "getPoemByVolume",
+        "parameters": [
+          {
+            "name": "volume",
+            "in": "path",
+            "description": "Volume number (must be between 1 and 74)",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 74
+            },
+            "example": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response containing the poem for the specified volume",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Poem"
+                },
+                "example": {
+                  "volume": 1,
+                  "title": "Death and Strawberry",
+                  "lines": [
+                    "We fear that which we cannot see"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid volume number (not a number or out of range)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Poem not found for the specified volume",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/random": {
+      "get": {
+        "summary": "Get random poem",
+        "description": "Returns a random poem from the Bleach series",
+        "operationId": "getRandomPoem",
+        "responses": {
+          "200": {
+            "description": "Successful response containing a random poem",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Poem"
+                },
+                "example": {
+                  "volume": 42,
+                  "title": "Heart",
+                  "lines": [
+                    "If you want to know me",
+                    "look inside your heart"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Poem": {
+        "type": "object",
+        "required": [
+          "volume",
+          "title",
+          "lines"
+        ],
+        "properties": {
+          "volume": {
+            "type": "integer",
+            "description": "The volume number of the Bleach manga",
+            "minimum": 1,
+            "maximum": 74,
+            "example": 1
+          },
+          "title": {
+            "type": "string",
+            "description": "The title of the poem",
+            "example": "Death and Strawberry"
+          },
+          "lines": {
+            "type": "array",
+            "description": "The lines of the poem",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "We fear that which we cannot see"
+            ]
+          }
+        }
+      },
+      "PoemsResponse": {
+        "type": "object",
+        "required": [
+          "poems"
+        ],
+        "properties": {
+          "poems": {
+            "type": "array",
+            "description": "Array of all poems from Bleach volumes 1-74",
+            "items": {
+              "$ref": "#/components/schemas/Poem"
+            }
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Error message"
+          }
+        }
+      }
+    }
+  }
+}

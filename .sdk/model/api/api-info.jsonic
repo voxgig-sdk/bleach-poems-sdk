@@ -1,0 +1,31 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        url: "https://codeberg.org/b_n_b/bleach-poems"
+      }
+      description: "This API provides a JSON representation of all poems from the Bleach series, encompassing volumes 1 to 74. Additionally, it features a simple web server that allows users to access poems by volume or retrieve a random poem."
+      license: {
+        name: "All rights to VIZ"
+        url: "https://codeberg.org/b_n_b/bleach-poems"
+      }
+      servers: [
+        {
+          description: "Public instance"
+          url: "https://bleach-poems.onrender.com"
+        }
+        {
+          description: "Local development server"
+          url: "http://localhost:8080"
+        }
+      ]
+      title: "Bleach Poems API"
+      version: "2.0.0"
+    }
+  }
+}
+
+}

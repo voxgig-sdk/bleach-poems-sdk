@@ -1,0 +1,429 @@
+{
+  "name": "bleach-poems",
+  "origin": "voxgig-sdk",
+  "def": "bleach-poems_0.1.0.json",
+  "main": {
+    "kit": {
+      "info": {
+        "contact": {
+          "url": "https://codeberg.org/b_n_b/bleach-poems"
+        },
+        "description": "This API provides a JSON representation of all poems from the Bleach series, encompassing volumes 1 to 74. Additionally, it features a simple web server that allows users to access poems by volume or retrieve a random poem.",
+        "license": {
+          "name": "All rights to VIZ",
+          "url": "https://codeberg.org/b_n_b/bleach-poems"
+        },
+        "servers": [
+          {
+            "description": "Public instance",
+            "url": "https://bleach-poems.onrender.com"
+          },
+          {
+            "description": "Local development server",
+            "url": "http://localhost:8080"
+          }
+        ],
+        "title": "Bleach Poems API",
+        "version": "2.0.0"
+      },
+      "config": {
+        "auth": {
+          "prefix": "Bearer"
+        },
+        "headers": {
+          "content-type": "application/json"
+        }
+      },
+      "entity": {
+        "poem": {
+          "alias": {
+            "field": {}
+          },
+          "fields": [
+            {
+              "name": "line",
+              "req": true,
+              "type": "`$ARRAY`",
+              "active": true
+            },
+            {
+              "name": "title",
+              "req": true,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "volume",
+              "req": true,
+              "type": "`$INTEGER`",
+              "active": true
+            }
+          ],
+          "name": "poem",
+          "op": {
+            "list": {
+              "name": "list",
+              "points": [
+                {
+                  "method": "GET",
+                  "orig": "/poems",
+                  "parts": [
+                    "poems"
+                  ],
+                  "transform": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  },
+                  "active": true,
+                  "args": {},
+                  "select": {}
+                },
+                {
+                  "method": "GET",
+                  "orig": "/random",
+                  "parts": [
+                    "random"
+                  ],
+                  "transform": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  },
+                  "active": true,
+                  "args": {},
+                  "select": {}
+                }
+              ],
+              "input": "data"
+            },
+            "load": {
+              "name": "load",
+              "points": [
+                {
+                  "args": {
+                    "params": [
+                      {
+                        "example": 1,
+                        "kind": "param",
+                        "name": "id",
+                        "orig": "volume",
+                        "reqd": true,
+                        "type": "`$INTEGER`",
+                        "active": true
+                      }
+                    ]
+                  },
+                  "method": "GET",
+                  "orig": "/poems/{volume}",
+                  "parts": [
+                    "poems",
+                    "{id}"
+                  ],
+                  "rename": {
+                    "param": {
+                      "volume": "id"
+                    }
+                  },
+                  "select": {
+                    "exist": [
+                      "id"
+                    ]
+                  },
+                  "transform": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  },
+                  "active": true
+                }
+              ],
+              "input": "data"
+            }
+          },
+          "active": true,
+          "relations": {
+            "ancestors": []
+          }
+        }
+      },
+      "feature": {
+        "test": {
+          "name": "test",
+          "title": "In-memory mock transport for testing without a live server",
+          "version": "0.0.1",
+          "active": true,
+          "config": {
+            "options": {
+              "active": false
+            }
+          },
+          "hook": {
+            "PostConstruct": {
+              "active": true,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": true,
+              "await": false
+            },
+            "SetData": {
+              "active": true,
+              "await": false
+            },
+            "GetData": {
+              "active": true,
+              "await": false
+            },
+            "SetMatch": {
+              "active": true
+            },
+            "GetMatch": {
+              "active": true,
+              "await": false
+            },
+            "PrePoint": {
+              "active": true
+            },
+            "PreSpec": {
+              "active": true,
+              "await": false
+            },
+            "PreRequest": {
+              "active": true,
+              "await": false
+            },
+            "PreResponse": {
+              "active": true,
+              "await": false
+            },
+            "PreResult": {
+              "active": true,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            }
+          },
+          "target": {
+            "ts": {
+              "deps": {}
+            },
+            "go": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            }
+          }
+        }
+      },
+      "flow": {
+        "BasicPoemFlow": {
+          "entity": "poem",
+          "kind": "basic",
+          "name": "BasicPoemFlow",
+          "step": [
+            {
+              "op": "list",
+              "valid": [
+                {
+                  "apply": "ItemExists",
+                  "def": {
+                    "ref": "poem_ref01"
+                  }
+                }
+              ],
+              "active": true,
+              "match": {},
+              "data": {},
+              "input": {},
+              "spec": []
+            },
+            {
+              "input": {
+                "ref": "poem_ref01",
+                "srcdatavar": "poem_ref01_data",
+                "suffix": "_dt0"
+              },
+              "match": {
+                "id": "poem01"
+              },
+              "op": "load",
+              "valid": [
+                {
+                  "apply": "TextFieldMark",
+                  "def": {
+                    "mark": "Mark01-poem_ref01"
+                  }
+                }
+              ],
+              "active": true,
+              "data": {},
+              "spec": []
+            }
+          ],
+          "key$": "BasicPoemFlow",
+          "active": true,
+          "param": {}
+        }
+      },
+      "target": {
+        "ts": {
+          "title": "TypeScript",
+          "ext": "ts",
+          "comment": {
+            "line": "//"
+          },
+          "module": {
+            "name": "bleach-poems"
+          },
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "deps": {
+            "dotenv": {
+              "active": true,
+              "version": "^17.4.2",
+              "kind": "dev"
+            },
+            "typescript": {
+              "active": true,
+              "version": "^5.9.3",
+              "kind": "dev"
+            },
+            "@types/node": {
+              "active": true,
+              "version": "^25.6.0",
+              "kind": "dev"
+            }
+          },
+          "name": "ts",
+          "active": true
+        },
+        "go": {
+          "title": "Golang",
+          "ext": "go",
+          "comment": {
+            "line": "//"
+          },
+          "module": {
+            "name": "bleach-poems"
+          },
+          "srcfeature": false,
+          "deps": {
+            "github.com/voxgig/struct": {
+              "active": true,
+              "version": "v0.0.0",
+              "replace": "./utility/struct",
+              "kind": "prod"
+            }
+          },
+          "name": "go",
+          "active": true
+        },
+        "lua": {
+          "title": "Lua",
+          "ext": "lua",
+          "comment": {
+            "line": "--"
+          },
+          "module": {
+            "name": "bleach-poems"
+          },
+          "srcfeature": false,
+          "deps": {
+            "dkjson": {
+              "active": true,
+              "version": "2.5",
+              "kind": "prod"
+            }
+          },
+          "name": "lua",
+          "active": true
+        },
+        "php": {
+          "title": "PHP",
+          "ext": "php",
+          "comment": {
+            "line": "//"
+          },
+          "module": {
+            "name": "bleach-poems"
+          },
+          "srcfeature": false,
+          "deps": {},
+          "name": "php",
+          "active": true
+        },
+        "py": {
+          "title": "Python",
+          "ext": "py",
+          "comment": {
+            "line": "#"
+          },
+          "module": {
+            "name": "bleach-poems"
+          },
+          "srcfeature": false,
+          "deps": {
+            "requests": {
+              "active": true,
+              "version": "2.33",
+              "kind": "prod"
+            }
+          },
+          "name": "py",
+          "active": true
+        },
+        "rb": {
+          "title": "Ruby",
+          "ext": "rb",
+          "comment": {
+            "line": "#"
+          },
+          "module": {
+            "name": "bleach-poems"
+          },
+          "srcfeature": false,
+          "deps": {
+            "voxgig-struct": {
+              "active": true,
+              "version": "0.0.10",
+              "kind": "prod"
+            },
+            "json": {
+              "active": true,
+              "version": "0",
+              "kind": "prod"
+            }
+          },
+          "name": "rb",
+          "active": true
+        }
+      },
+      "option": {}
+    },
+    "def": {
+      "desc": ""
+    },
+    "api": {
+      "guide": {},
+      "entity": {}
+    }
+  },
+  "name__orig": "bleach-poems",
+  "Name": "BleachPoems",
+  "name_": "bleach_poems",
+  "name-": "bleach-poems",
+  "NAME": "BLEACH-POEMS"
+}

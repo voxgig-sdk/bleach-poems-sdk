@@ -1,0 +1,97 @@
+# Entity: poem
+
+main: kit: entity: poem: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "line"
+      req: true
+      type: "`$ARRAY`"
+    }
+    {
+      name: "title"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "volume"
+      req: true
+      type: "`$INTEGER`"
+    }
+  ]
+
+  name: "poem"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          method: "GET"
+          orig: "/poems"
+          parts: [
+            "poems"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          method: "GET"
+          orig: "/random"
+          parts: [
+            "random"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: 1
+                kind: "param"
+                name: "id"
+                orig: "volume"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/poems/{volume}"
+          parts: [
+            "poems"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              volume: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}
