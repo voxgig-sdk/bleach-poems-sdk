@@ -4,17 +4,20 @@
       "POEM00": {
         "line": [],
         "title": "s1f",
-        "volume": "s20"
+        "volume": "s20",
+        "id": "POEM00"
       },
       "POEM01": {
         "line": [],
         "title": "s3d",
-        "volume": "s3e"
+        "volume": "s3e",
+        "id": "POEM01"
       },
       "POEM02": {
         "line": [],
         "title": "s5b",
-        "volume": "s5c"
+        "volume": "s5c",
+        "id": "POEM02"
       }
     }
   },

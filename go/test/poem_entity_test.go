@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/voxgig-sdk/bleach-poems-sdk"
-	"github.com/voxgig-sdk/bleach-poems-sdk/core"
+	sdk "github.com/voxgig-sdk/bleach-poems-sdk/go"
+	"github.com/voxgig-sdk/bleach-poems-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/bleach-poems-sdk/go/utility/struct"
 )
 
 func TestPoemEntity(t *testing.T) {

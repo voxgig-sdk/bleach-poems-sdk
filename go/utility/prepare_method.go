@@ -1,6 +1,6 @@
 package utility
 
-import "github.com/voxgig-sdk/bleach-poems-sdk/core"
+import "github.com/voxgig-sdk/bleach-poems-sdk/go/core"
 
 func prepareMethodUtil(ctx *core.Context) string {
 	opname := ctx.Op.Name

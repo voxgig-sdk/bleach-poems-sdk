@@ -3,7 +3,7 @@ package sdktest
 import (
 	"testing"
 
-	sdk "github.com/voxgig-sdk/bleach-poems-sdk"
+	sdk "github.com/voxgig-sdk/bleach-poems-sdk/go"
 )
 
 func TestExists(t *testing.T) {

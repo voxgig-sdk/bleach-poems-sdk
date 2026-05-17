@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/bleach-poems-sdk"
-	"github.com/voxgig-sdk/bleach-poems-sdk/core"
+	sdk "github.com/voxgig-sdk/bleach-poems-sdk/go"
+	"github.com/voxgig-sdk/bleach-poems-sdk/go/core"
 )
 
 func TestPoemDirect(t *testing.T) {

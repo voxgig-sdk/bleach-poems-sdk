@@ -4,9 +4,9 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/bleach-poems-sdk"
+	sdk "github.com/voxgig-sdk/bleach-poems-sdk/go"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/bleach-poems-sdk/go/utility/struct"
 )
 
 func TestPrimaryUtility(t *testing.T) {

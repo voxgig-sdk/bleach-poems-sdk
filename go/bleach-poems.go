@@ -1,10 +1,10 @@
 package voxgigbleachpoemssdk
 
 import (
-	"github.com/voxgig-sdk/bleach-poems-sdk/core"
-	"github.com/voxgig-sdk/bleach-poems-sdk/entity"
-	"github.com/voxgig-sdk/bleach-poems-sdk/feature"
-	_ "github.com/voxgig-sdk/bleach-poems-sdk/utility"
+	"github.com/voxgig-sdk/bleach-poems-sdk/go/core"
+	"github.com/voxgig-sdk/bleach-poems-sdk/go/entity"
+	"github.com/voxgig-sdk/bleach-poems-sdk/go/feature"
+	_ "github.com/voxgig-sdk/bleach-poems-sdk/go/utility"
 )
 
 // Type aliases preserve external API.
