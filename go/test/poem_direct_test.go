@@ -175,14 +175,12 @@ func poemDirectSetup(mockres any) *poemDirectSetupResult {
 	env := envOverride(map[string]any{
 		"BLEACHPOEMS_TEST_POEM_ENTID": map[string]any{},
 		"BLEACHPOEMS_TEST_LIVE":    "FALSE",
-		"BLEACHPOEMS_APIKEY":       "NONE",
 	})
 
 	live := env["BLEACHPOEMS_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["BLEACHPOEMS_APIKEY"],
 		}
 		client := sdk.NewBleachPoemsSDK(mergedOpts)
 

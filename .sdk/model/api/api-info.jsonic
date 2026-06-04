@@ -24,8 +24,27 @@ main: {
       ]
       title: "Bleach Poems API"
       version: "2.0.0"
+      tagline: "Fetch the chapter-opening poems from every volume of Tite Kubo's Bleach manga as JSON"
+      homepage: "https://bleach-poems.onrender.com"
+      docs_url: "https://freepublicapis.com/bleach-poems-api"
+      license_short: "All rights to VIZ Media; poem text is fan-curated from the Bleach manga."
+      license_md: `- Underlying poem text is the intellectual property of Tite Kubo / VIZ Media.
+- The API itself is a community project; no explicit software licence is published on the service.
+- Treat responses as fan-curated reference material rather than an official product.
+- Attribute the original work to its publisher when redistributing the text.`
+      about_md: `The Bleach Poems API is a small community service that returns the short opening poems printed at the start of each volume of Tite Kubo's *Bleach* manga, covering volumes 1 through 74. It is operated by an independent maintainer ("b_n_b") and hosted on [Render](https://render.com) at \`https://bleach-poems.onrender.com\`.
+
+What you can do with the API:
+
+- \`GET /poems\` — list every catalogued poem.
+- \`GET /poems/{id}\` — fetch a single poem by its identifier (e.g. \`/poems/5\`).
+- \`GET /random\` — return one randomly selected poem.
+
+Operational notes: no authentication or API key is required, and no rate limits are documented. CORS is reported as disabled across all endpoints, so browser clients on a different origin may need a proxy. As a free Render-hosted service, the first request after an idle period can be slow while the dyno wakes.`
+      entity_desc: {
+        poem: "A single Bleach volume-opening poem, addressable as a collection at `/poems`, individually at `/poems/{id}`, or as a random pick via `/random`."
+      }
+      auth: false
     }
   }
-}
-
 }

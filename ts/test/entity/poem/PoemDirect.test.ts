@@ -117,14 +117,12 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'BLEACHPOEMS_TEST_POEM_ENTID': {},
     'BLEACHPOEMS_TEST_LIVE': 'FALSE',
-    'BLEACHPOEMS_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.BLEACHPOEMS_TEST_LIVE
 
   if (live) {
     const client = new BleachPoemsSDK({
-      apikey: env.BLEACHPOEMS_APIKEY,
     })
 
     let idmap: any = env['BLEACHPOEMS_TEST_POEM_ENTID']

@@ -106,14 +106,12 @@ def _poem_direct_setup(mockres):
     env = runner.env_override({
         "BLEACHPOEMS_TEST_POEM_ENTID": {},
         "BLEACHPOEMS_TEST_LIVE": "FALSE",
-        "BLEACHPOEMS_APIKEY": "NONE",
     })
 
     live = env.get("BLEACHPOEMS_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
-            "apikey": env.get("BLEACHPOEMS_APIKEY"),
         }
         client = BleachPoemsSDK(merged_opts)
         return {
