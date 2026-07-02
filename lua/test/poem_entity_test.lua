@@ -98,6 +98,7 @@ function poem_basic_setup(extra)
     ["BLEACHPOEMS_TEST_POEM_ENTID"] = idmap,
     ["BLEACHPOEMS_TEST_LIVE"] = "FALSE",
     ["BLEACHPOEMS_TEST_EXPLAIN"] = "FALSE",
+    ["BLEACHPOEMS_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -109,6 +110,7 @@ function poem_basic_setup(extra)
   if env["BLEACHPOEMS_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
+        apikey = env["BLEACHPOEMS_APIKEY"],
       },
       extra or {},
     })

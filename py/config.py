@@ -15,6 +15,9 @@ def make_config():
         },
         "options": {
             "base": "https://bleach-poems.onrender.com",
+            "auth": {
+                "prefix": "Bearer",
+            },
             "headers": {
         "content-type": "application/json",
       },
@@ -26,80 +29,82 @@ def make_config():
       "poem": {
         "fields": [
           {
+            "active": True,
             "name": "line",
             "req": True,
             "type": "`$ARRAY`",
-            "active": True,
             "index$": 0,
           },
           {
+            "active": True,
             "name": "title",
             "req": True,
             "type": "`$STRING`",
-            "active": True,
             "index$": 1,
           },
           {
+            "active": True,
             "name": "volume",
             "req": True,
             "type": "`$INTEGER`",
-            "active": True,
             "index$": 2,
           },
         ],
         "name": "poem",
         "op": {
           "list": {
+            "input": "data",
             "name": "list",
             "points": [
               {
+                "active": True,
+                "args": {},
                 "method": "GET",
                 "orig": "/poems",
                 "parts": [
                   "poems",
                 ],
+                "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
-                "args": {},
-                "select": {},
                 "index$": 0,
               },
               {
+                "active": True,
+                "args": {},
                 "method": "GET",
                 "orig": "/random",
                 "parts": [
                   "random",
                 ],
+                "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
-                "args": {},
-                "select": {},
                 "index$": 1,
               },
             ],
-            "input": "data",
             "key$": "list",
           },
           "load": {
+            "input": "data",
             "name": "load",
             "points": [
               {
+                "active": True,
                 "args": {
                   "params": [
                     {
+                      "active": True,
                       "example": 1,
                       "kind": "param",
                       "name": "id",
                       "orig": "volume",
                       "reqd": True,
                       "type": "`$INTEGER`",
-                      "active": True,
                     },
                   ],
                 },
@@ -123,11 +128,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "load",
           },
         },

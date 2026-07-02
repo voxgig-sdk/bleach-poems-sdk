@@ -14,6 +14,9 @@ func MakeConfig() map[string]any {
 		},
 		"options": map[string]any{
 			"base": "https://bleach-poems.onrender.com",
+			"auth": map[string]any{
+				"prefix": "Bearer",
+			},
 			"headers": map[string]any{
 				"content-type": "application/json",
 			},
@@ -25,80 +28,82 @@ func MakeConfig() map[string]any {
 			"poem": map[string]any{
 				"fields": []any{
 					map[string]any{
+						"active": true,
 						"name": "line",
 						"req": true,
 						"type": "`$ARRAY`",
-						"active": true,
 						"index$": 0,
 					},
 					map[string]any{
+						"active": true,
 						"name": "title",
 						"req": true,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 1,
 					},
 					map[string]any{
+						"active": true,
 						"name": "volume",
 						"req": true,
 						"type": "`$INTEGER`",
-						"active": true,
 						"index$": 2,
 					},
 				},
 				"name": "poem",
 				"op": map[string]any{
 					"list": map[string]any{
+						"input": "data",
 						"name": "list",
 						"points": []any{
 							map[string]any{
+								"active": true,
+								"args": map[string]any{},
 								"method": "GET",
 								"orig": "/poems",
 								"parts": []any{
 									"poems",
 								},
+								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"active": true,
-								"args": map[string]any{},
-								"select": map[string]any{},
 								"index$": 0,
 							},
 							map[string]any{
+								"active": true,
+								"args": map[string]any{},
 								"method": "GET",
 								"orig": "/random",
 								"parts": []any{
 									"random",
 								},
+								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"active": true,
-								"args": map[string]any{},
-								"select": map[string]any{},
 								"index$": 1,
 							},
 						},
-						"input": "data",
 						"key$": "list",
 					},
 					"load": map[string]any{
+						"input": "data",
 						"name": "load",
 						"points": []any{
 							map[string]any{
+								"active": true,
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
+											"active": true,
 											"example": 1,
 											"kind": "param",
 											"name": "id",
 											"orig": "volume",
 											"reqd": true,
 											"type": "`$INTEGER`",
-											"active": true,
 										},
 									},
 								},
@@ -122,11 +127,9 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"active": true,
 								"index$": 0,
 							},
 						},
-						"input": "data",
 						"key$": "load",
 					},
 				},

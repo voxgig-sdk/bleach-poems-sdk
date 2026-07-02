@@ -38,6 +38,10 @@ class Config {
   options = {
     base: 'https://bleach-poems.onrender.com',
 
+    auth: {
+      prefix: 'Bearer',
+    },
+
     headers: {
       "content-type": "application/json"
     },
@@ -55,80 +59,82 @@ class Config {
     "poem": {
       "fields": [
         {
+          "active": true,
           "name": "line",
           "req": true,
           "type": "`$ARRAY`",
-          "active": true,
           "index$": 0
         },
         {
+          "active": true,
           "name": "title",
           "req": true,
           "type": "`$STRING`",
-          "active": true,
           "index$": 1
         },
         {
+          "active": true,
           "name": "volume",
           "req": true,
           "type": "`$INTEGER`",
-          "active": true,
           "index$": 2
         }
       ],
       "name": "poem",
       "op": {
         "list": {
+          "input": "data",
           "name": "list",
           "points": [
             {
+              "active": true,
+              "args": {},
               "method": "GET",
               "orig": "/poems",
               "parts": [
                 "poems"
               ],
+              "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "active": true,
-              "args": {},
-              "select": {},
               "index$": 0
             },
             {
+              "active": true,
+              "args": {},
               "method": "GET",
               "orig": "/random",
               "parts": [
                 "random"
               ],
+              "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "active": true,
-              "args": {},
-              "select": {},
               "index$": 1
             }
           ],
-          "input": "data",
           "key$": "list"
         },
         "load": {
+          "input": "data",
           "name": "load",
           "points": [
             {
+              "active": true,
               "args": {
                 "params": [
                   {
+                    "active": true,
                     "example": 1,
                     "kind": "param",
                     "name": "id",
                     "orig": "volume",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "active": true
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -152,11 +158,9 @@ class Config {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "active": true,
               "index$": 0
             }
           ],
-          "input": "data",
           "key$": "load"
         }
       },

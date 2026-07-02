@@ -1,20 +1,8 @@
 # BleachPoems SDK
 
-Fetch the chapter-opening poems from every volume of Tite Kubo's Bleach manga as JSON
+Bleach Poems API client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About Bleach Poems API
-
-The Bleach Poems API is a small community service that returns the short opening poems printed at the start of each volume of Tite Kubo's *Bleach* manga, covering volumes 1 through 74. It is operated by an independent maintainer ("b_n_b") and hosted on [Render](https://render.com) at `https://bleach-poems.onrender.com`.
-
-What you can do with the API:
-
-- `GET /poems` — list every catalogued poem.
-- `GET /poems/{id}` — fetch a single poem by its identifier (e.g. `/poems/5`).
-- `GET /random` — return one randomly selected poem.
-
-Operational notes: no authentication or API key is required, and no rate limits are documented. CORS is reported as disabled across all endpoints, so browser clients on a different origin may need a proxy. As a free Render-hosted service, the first request after an idle period can be slow while the dyno wakes.
 
 ## Try it
 
@@ -48,29 +36,31 @@ gem install bleach-poems-sdk
 luarocks install bleach-poems-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { BleachPoemsSDK } from 'bleach-poems'
 
-const client = new BleachPoemsSDK({})
+const client = new BleachPoemsSDK({
+  apikey: process.env.BLEACH-POEMS_APIKEY,
+})
 
 // List all poems
 const poems = await client.Poem().list()
+console.log(poems.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -100,7 +90,7 @@ The API exposes one entity:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Poem** | A single Bleach volume-opening poem, addressable as a collection at `/poems`, individually at `/poems/{id}`, or as a random pick via `/random`. | `/poems` |
+| **Poem** |  | `/poems` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -110,17 +100,20 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from bleachpoems_sdk import BleachPoemsSDK
 
-client = BleachPoemsSDK({})
+client = BleachPoemsSDK({
+    "apikey": os.environ.get("BLEACH-POEMS_APIKEY"),
+})
 
 # List all poems
-poems, err = client.Poem(None).list(None, None)
+poems, err = client.Poem().list()
+print(poems)
 
 # Load a specific poem
-poem, err = client.Poem(None).load(
-    {"id": "example_id"}, None
-)
+poem, err = client.Poem().load({"id": "example_id"})
+print(poem)
 ```
 
 ### PHP
@@ -129,15 +122,17 @@ poem, err = client.Poem(None).load(
 <?php
 require_once 'bleachpoems_sdk.php';
 
-$client = new BleachPoemsSDK([]);
+$client = new BleachPoemsSDK([
+    "apikey" => getenv("BLEACH-POEMS_APIKEY"),
+]);
 
 // List all poems
-[$poems, $err] = $client->Poem(null)->list(null, null);
+[$poems, $err] = $client->Poem()->list();
+print_r($poems);
 
 // Load a specific poem
-[$poem, $err] = $client->Poem(null)->load(
-    ["id" => "example_id"], null
-);
+[$poem, $err] = $client->Poem()->load(["id" => "example_id"]);
+print_r($poem);
 ```
 
 ### Golang
@@ -145,10 +140,13 @@ $client = new BleachPoemsSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/bleach-poems-sdk/go"
 
-client := sdk.NewBleachPoemsSDK(map[string]any{})
+client := sdk.NewBleachPoemsSDK(map[string]any{
+    "apikey": os.Getenv("BLEACH-POEMS_APIKEY"),
+})
 
 // List all poems
 poems, err := client.Poem(nil).List(nil, nil)
+fmt.Println(poems)
 ```
 
 ### Ruby
@@ -156,15 +154,17 @@ poems, err := client.Poem(nil).List(nil, nil)
 ```ruby
 require_relative "BleachPoems_sdk"
 
-client = BleachPoemsSDK.new({})
+client = BleachPoemsSDK.new({
+  "apikey" => ENV["BLEACH-POEMS_APIKEY"],
+})
 
 # List all poems
-poems, err = client.Poem(nil).list(nil, nil)
+poems, err = client.Poem().list
+puts poems
 
 # Load a specific poem
-poem, err = client.Poem(nil).load(
-  { "id" => "example_id" }, nil
-)
+poem, err = client.Poem().load({ "id" => "example_id" })
+puts poem
 ```
 
 ### Lua
@@ -172,15 +172,17 @@ poem, err = client.Poem(nil).load(
 ```lua
 local sdk = require("bleach-poems_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("BLEACH-POEMS_APIKEY"),
+})
 
 -- List all poems
-local poems, err = client:Poem(nil):list(nil, nil)
+local poems, err = client:Poem():list()
+print(poems)
 
 -- Load a specific poem
-local poem, err = client:Poem(nil):load(
-  { id = "example_id" }, nil
-)
+local poem, err = client:Poem():load({ id = "example_id" })
+print(poem)
 ```
 
 ## Unit testing in offline mode
@@ -199,25 +201,21 @@ const result = await client.Poem().load({ id: 'test01' })
 ### Python
 
 ```python
-client = BleachPoemsSDK.test(None, None)
-result, err = client.Poem(None).load(
-    {"id": "test01"}, None
-)
+client = BleachPoemsSDK.test()
+result, err = client.Poem().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = BleachPoemsSDK::test(null, null);
-[$result, $err] = $client->Poem(null)->load(
-    ["id" => "test01"], null
-);
+$client = BleachPoemsSDK::test();
+[$result, $err] = $client->Poem()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.Poem(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -226,19 +224,15 @@ result, err := client.Poem(nil).Load(
 ### Ruby
 
 ```ruby
-client = BleachPoemsSDK.test(nil, nil)
-result, err = client.Poem(nil).load(
-  { "id" => "test01" }, nil
-)
+client = BleachPoemsSDK.test
+result, err = client.Poem().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:Poem(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:Poem():load({ id = "test01" })
 ```
 
 ## How it works
@@ -342,16 +336,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the Bleach Poems API
-
-- Upstream: [https://bleach-poems.onrender.com](https://bleach-poems.onrender.com)
-- API docs: [https://freepublicapis.com/bleach-poems-api](https://freepublicapis.com/bleach-poems-api)
-
-- Underlying poem text is the intellectual property of Tite Kubo / VIZ Media.
-- The API itself is a community project; no explicit software licence is published on the service.
-- Treat responses as fan-curated reference material rather than an official product.
-- Attribute the original work to its publisher when redistributing the text.
 
 ---
 
