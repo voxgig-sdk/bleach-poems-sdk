@@ -10,7 +10,7 @@ The TypeScript SDK for the BleachPoems API — a type-safe, entity-oriented clie
 
 ## Install
 ```bash
-npm install bleach-poems
+npm install @voxgig-sdk/bleach-poems
 ```
 ## Tutorial: your first API call
 

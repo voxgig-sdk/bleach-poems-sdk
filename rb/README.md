@@ -10,13 +10,13 @@ The Ruby SDK for the BleachPoems API — an entity-oriented client using idiomat
 
 ## Install
 ```bash
-gem install bleach-poems-sdk
+gem install voxgig-sdk-bleach-poems
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "bleach-poems-sdk"
+gem "voxgig-sdk-bleach-poems"
 ```
 
 Then run:

@@ -10,7 +10,7 @@ The PHP SDK for the BleachPoems API — an entity-oriented client using PHP conv
 
 ## Install
 ```bash
-composer require voxgig/bleach-poems-sdk
+composer require voxgig-sdk/bleach-poems
 ```
 
 

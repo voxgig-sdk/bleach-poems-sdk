@@ -8,12 +8,14 @@ source = {
   dir = "bleach-poems-sdk/lua"
 }
 description = {
-  summary = "BleachPoems SDK for Lua",
-  license = "MIT"
+  summary = "Unofficial generated Lua SDK for the Bleach Poems public API. Not affiliated with or endorsed by the upstream API provider.",
+  homepage = "https://github.com/voxgig-sdk/bleach-poems-sdk",
+  issues_url = "https://github.com/voxgig-sdk/bleach-poems-sdk/issues",
+  license = "MIT",
+  labels = { "voxgig", "sdk", "generated-sdk", "openapi", "api-client", "bleach-poems" }
 }
 dependencies = {
   "lua >= 5.3",
-  "dkjson >= 2.5",
   "dkjson >= 2.5",
 }
 build = {

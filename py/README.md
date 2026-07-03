@@ -10,7 +10,7 @@ The Python SDK for the BleachPoems API — an entity-oriented client following P
 
 ## Install
 ```bash
-pip install bleach-poems-sdk
+pip install voxgig-sdk-bleach-poems
 ```
 
 Or install from source:
