@@ -14,9 +14,6 @@ local function make_config()
     },
     options = {
       base = "https://bleach-poems.onrender.com",
-      auth = {
-        prefix = "Bearer",
-      },
       headers = {
         ["content-type"] = "application/json",
       },
@@ -104,6 +101,7 @@ local function make_config()
                       ["orig"] = "volume",
                       ["reqd"] = true,
                       ["type"] = "`$INTEGER`",
+                      ["index$"] = 0,
                     },
                   },
                 },

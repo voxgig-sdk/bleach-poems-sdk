@@ -38,10 +38,6 @@ class Config {
   options = {
     base: 'https://bleach-poems.onrender.com',
 
-    auth: {
-      prefix: 'Bearer',
-    },
-
     headers: {
       "content-type": "application/json"
     },
@@ -134,7 +130,8 @@ class Config {
                     "name": "id",
                     "orig": "volume",
                     "reqd": true,
-                    "type": "`$INTEGER`"
+                    "type": "`$INTEGER`",
+                    "index$": 0
                   }
                 ]
               },

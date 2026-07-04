@@ -2,6 +2,8 @@
 
 import { PoemEntity } from './entity/PoemEntity'
 
+export type * from './BleachPoemsTypes'
+
 
 import { inspect } from 'node:util'
 
@@ -202,6 +204,14 @@ class BleachPoemsSDK {
 
 
 
+  _poem?: PoemEntity
+
+  // Idiomatic facade: `client.poem.list()` / `client.poem.load({ id })`.
+  get poem(): PoemEntity {
+    return (this._poem ??= new PoemEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.poem` instead. */
   Poem(data?: any) {
     const self = this
     return new PoemEntity(self,data)

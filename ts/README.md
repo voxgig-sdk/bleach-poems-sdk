@@ -9,9 +9,12 @@ The TypeScript SDK for the BleachPoems API — a type-safe, entity-oriented clie
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/bleach-poems
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/bleach-poems-sdk/releases](https://github.com/voxgig-sdk/bleach-poems-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,17 +23,15 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { BleachPoemsSDK } from 'bleach-poems'
+import { BleachPoemsSDK } from '@voxgig-sdk/bleach-poems'
 
-const client = new BleachPoemsSDK({
-  apikey: process.env.BLEACH-POEMS_APIKEY,
-})
+const client = new BleachPoemsSDK()
 ```
 
 ### 2. List poems
 
 ```ts
-const result = await client.Poem().list()
+const result = await client.poem.list()
 
 if (result.ok) {
   for (const item of result.data) {
@@ -42,7 +43,7 @@ if (result.ok) {
 ### 3. Load a poem
 
 ```ts
-const result = await client.Poem().load({ id: 'example_id' })
+const result = await client.poem.load({ id: 'example_id' })
 
 if (result.ok) {
   console.log(result.data)
@@ -91,7 +92,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = BleachPoemsSDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.poem.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -99,7 +100,7 @@ const result = await client.Planet().load({ id: 'test01' })
 You can also use the instance method:
 
 ```ts
-const client = new BleachPoemsSDK({ apikey: '...' })
+const client = new BleachPoemsSDK()
 const testClient = client.tester()
 ```
 
@@ -108,7 +109,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.poem
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -135,7 +136,6 @@ const logger = {
 }
 
 const client = new BleachPoemsSDK({
-  apikey: '...',
   extend: [logger],
 })
 ```
@@ -145,8 +145,7 @@ const client = new BleachPoemsSDK({
 Create a `.env.local` file at the project root:
 
 ```
-BLEACH-POEMS_TEST_LIVE=TRUE
-BLEACH-POEMS_APIKEY=<your-key>
+BLEACH_POEMS_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -164,7 +163,6 @@ cd ts && npm test
 
 ```ts
 new BleachPoemsSDK(options?: {
-  apikey?: string
   base?: string
   prefix?: string
   suffix?: string
@@ -175,7 +173,6 @@ new BleachPoemsSDK(options?: {
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -280,7 +277,7 @@ API path: `/poems`
 
 ### Poem
 
-Create an instance: `const poem = client.Poem()`
+Create an instance: `const poem = client.poem`
 
 #### Operations
 
@@ -300,13 +297,13 @@ Create an instance: `const poem = client.Poem()`
 #### Example: Load
 
 ```ts
-const poem = await client.Poem().load({ id: 'poem_id' })
+const poem = await client.poem.load({ id: 'poem_id' })
 ```
 
 #### Example: List
 
 ```ts
-const poems = await client.Poem().list()
+const poems = await client.poem.list()
 ```
 
 
@@ -367,7 +364,7 @@ bleach-poems/
 Import the SDK from the package root:
 
 ```ts
-import { BleachPoemsSDK } from 'bleach-poems'
+import { BleachPoemsSDK } from '@voxgig-sdk/bleach-poems'
 ```
 
 ### Entity state
@@ -377,11 +374,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const poem = client.poem
+await poem.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// poem.data() now returns the loaded poem data
+// poem.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

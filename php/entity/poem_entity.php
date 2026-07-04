@@ -55,6 +55,9 @@ class PoemEntity
         return new PoemEntity($this->_client, $opts);
     }
 
+    /**
+     * @param Poem|array $args Poem data (assoc-array) to store.
+     */
     public function data_set($args): void
     {
         if ($args) {
@@ -63,12 +66,18 @@ class PoemEntity
         }
     }
 
+    /**
+     * @return Poem|array The current Poem data as an assoc-array.
+     */
     public function data_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetData");
         return Struct::clone($this->_data);
     }
 
+    /**
+     * @param array $args Match filter (any subset of Poem fields).
+     */
     public function match_set($args): void
     {
         if ($args) {
@@ -77,6 +86,9 @@ class PoemEntity
         }
     }
 
+    /**
+     * @return array The current match filter (any subset of Poem fields).
+     */
     public function match_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetMatch");
@@ -84,7 +96,16 @@ class PoemEntity
     }
 
     
-    public function load($reqmatch, $ctrl = null): array
+    /**
+     * Load a single Poem.
+     *
+     * @param PoemLoadMatch|array|null $reqmatch Match criteria (id/query
+     *   fields) as an assoc-array; a typed PoemLoadMatch names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Poem|array The loaded Poem as an assoc-array at the
+     *   SDK boundary; throws BleachPoemsError on failure (item-5 convention).
+     */
+    public function load(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -110,7 +131,16 @@ class PoemEntity
 
 
     
-    public function list($reqmatch, $ctrl = null): array
+    /**
+     * List Poem items matching the given filter.
+     *
+     * @param PoemListMatch|array|null $reqmatch Match filter (any subset
+     *   of Poem fields) as an assoc-array; PoemListMatch names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Poem[]|array A list of Poem items as assoc-arrays at
+     *   the SDK boundary; throws BleachPoemsError on failure (item-5 convention).
+     */
+    public function list(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -138,7 +168,7 @@ class PoemEntity
 
     
 
-    private function _run_op($ctx, callable $post_done): array
+    private function _run_op($ctx, callable $post_done): mixed
     {
         $utility = $this->_utility;
 

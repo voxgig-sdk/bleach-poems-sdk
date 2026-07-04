@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch PoemLoadMatch
+---@param ctrl? table
+---@return Poem
+---@return string? err
 function PoemEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -104,6 +108,10 @@ end
 
 
 
+---@param reqmatch PoemListMatch
+---@param ctrl? table
+---@return Poem[]
+---@return string? err
 function PoemEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

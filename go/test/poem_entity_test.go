@@ -129,7 +129,6 @@ func poemBasicSetup(extra map[string]any) *entityTestSetup {
 		"BLEACHPOEMS_TEST_POEM_ENTID": idmap,
 		"BLEACHPOEMS_TEST_LIVE":      "FALSE",
 		"BLEACHPOEMS_TEST_EXPLAIN":   "FALSE",
-		"BLEACHPOEMS_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["BLEACHPOEMS_TEST_POEM_ENTID"])
@@ -140,7 +139,6 @@ func poemBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["BLEACHPOEMS_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
-				"apikey": env["BLEACHPOEMS_APIKEY"],
 			},
 			extra,
 		})

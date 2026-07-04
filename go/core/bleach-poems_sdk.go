@@ -245,6 +245,9 @@ func (sdk *BleachPoemsSDK) Direct(fetchargs map[string]any) (map[string]any, err
 }
 
 
+// Poem returns a Poem entity bound to this client.
+// Idiomatic usage: client.Poem(nil).List(nil, nil) or
+// client.Poem(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *BleachPoemsSDK) Poem(data map[string]any) BleachPoemsEntity {
 	return NewPoemEntityFunc(sdk, data)
 }

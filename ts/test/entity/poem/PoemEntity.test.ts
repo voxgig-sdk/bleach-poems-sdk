@@ -114,7 +114,6 @@ function basicSetup(extra?: any) {
     'BLEACH_POEMS_TEST_POEM_ENTID': idmap,
     'BLEACH_POEMS_TEST_LIVE': 'FALSE',
     'BLEACH_POEMS_TEST_EXPLAIN': 'FALSE',
-    'BLEACH_POEMS_APIKEY': 'NONE',
   })
 
   idmap = env['BLEACH_POEMS_TEST_POEM_ENTID']
@@ -124,7 +123,6 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new BleachPoemsSDK(merge([
       {
-        apikey: env.BLEACH_POEMS_APIKEY,
       },
       extra
     ]))

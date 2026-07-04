@@ -20,9 +20,6 @@ class BleachPoemsConfig
             ],
             "options" => [
                 "base" => "https://bleach-poems.onrender.com",
-                "auth" => [
-                    "prefix" => "Bearer",
-                ],
                 "headers" => [
           'content-type' => 'application/json',
         ],
@@ -110,6 +107,7 @@ class BleachPoemsConfig
                         'orig' => 'volume',
                         'reqd' => true,
                         'type' => '`$INTEGER`',
+                        'index$' => 0,
                       ],
                     ],
                   ],

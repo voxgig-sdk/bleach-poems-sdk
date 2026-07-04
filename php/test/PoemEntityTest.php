@@ -50,14 +50,12 @@ class PoemEntityTest extends TestCase
         $poem_ref01_ent = $client->Poem(null);
         $poem_ref01_match = [];
 
-        [$poem_ref01_list_result, $err] = $poem_ref01_ent->list($poem_ref01_match, null);
-        $this->assertNull($err);
+        $poem_ref01_list_result = $poem_ref01_ent->list($poem_ref01_match, null);
         $this->assertIsArray($poem_ref01_list_result);
 
         // LOAD
         $poem_ref01_match_dt0 = [];
-        [$poem_ref01_data_dt0_loaded, $err] = $poem_ref01_ent->load($poem_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $poem_ref01_data_dt0_loaded = $poem_ref01_ent->load($poem_ref01_match_dt0, null);
         $this->assertNotNull($poem_ref01_data_dt0_loaded);
 
     }
@@ -92,7 +90,6 @@ function poem_basic_setup($extra)
         "BLEACHPOEMS_TEST_POEM_ENTID" => $idmap,
         "BLEACHPOEMS_TEST_LIVE" => "FALSE",
         "BLEACHPOEMS_TEST_EXPLAIN" => "FALSE",
-        "BLEACHPOEMS_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -104,7 +101,6 @@ function poem_basic_setup($extra)
     if ($env["BLEACHPOEMS_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["BLEACHPOEMS_APIKEY"],
             ],
             $extra ?? [],
         ]);

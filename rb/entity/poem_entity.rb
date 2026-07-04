@@ -45,6 +45,7 @@ class PoemEntity
     end
   end
 
+  # @return [Poem, Hash] the current Poem data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class PoemEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Poem fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single Poem.
+  #
+  # @param reqmatch [PoemLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Poem, Hash] the loaded Poem; raises BleachPoemsError on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -86,6 +93,11 @@ class PoemEntity
 
 
   
+  # List Poem items matching the given filter.
+  #
+  # @param reqmatch [PoemListMatch, Hash, nil] match filter (any subset of Poem fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<Poem>, Array] the matching Poem items; raises BleachPoemsError on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

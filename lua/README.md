@@ -9,12 +9,9 @@ The Lua SDK for the BleachPoems API — an entity-oriented client using Lua conv
 
 
 ## Install
-```bash
-luarocks install voxgig-sdk-bleach-poems
-```
-
-If the module is not yet published, add the source directory to
-your `LUA_PATH`:
+This package is not yet published to LuaRocks. Install it from the
+GitHub release tag (`lua/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/bleach-poems-sdk/releases)),
+or add the source directory to your `LUA_PATH`:
 
 ```bash
 export LUA_PATH="path/to/lua/?.lua;path/to/lua/?/init.lua;;"
@@ -31,15 +28,13 @@ loading a specific record.
 ```lua
 local sdk = require("bleach-poems_sdk")
 
-local client = sdk.new({
-  apikey = os.getenv("BLEACH-POEMS_APIKEY"),
-})
+local client = sdk.new()
 ```
 
 ### 2. List poems
 
 ```lua
-local result, err = client:Poem():list()
+local result, err = client:poem():list()
 if err then error(err) end
 
 if type(result) == "table" then
@@ -53,7 +48,7 @@ end
 ### 3. Load a poem
 
 ```lua
-local result, err = client:Poem():load({ id = "example_id" })
+local result, err = client:poem():load({ id = "example_id" })
 if err then error(err) end
 print(result)
 ```
@@ -101,7 +96,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:BleachPoems():load({ id = "test01" })
+local result, err = client:poem():load({ id = "test01" })
 -- result contains mock response data
 ```
 
@@ -134,8 +129,7 @@ local client = sdk.new({
 Create a `.env.local` file at the project root:
 
 ```
-BLEACH-POEMS_TEST_LIVE=TRUE
-BLEACH-POEMS_APIKEY=<your-key>
+BLEACH_POEMS_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -158,7 +152,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -237,7 +230,7 @@ API path: `/poems`
 
 ### Poem
 
-Create an instance: `const poem = client.Poem()`
+Create an instance: `const poem = client.poem`
 
 #### Operations
 
@@ -257,13 +250,13 @@ Create an instance: `const poem = client.Poem()`
 #### Example: Load
 
 ```ts
-const poem = await client.Poem().load({ id: 'poem_id' })
+const poem = await client.poem.load({ id: 'poem_id' })
 ```
 
 #### Example: List
 
 ```ts
-const poems = await client.Poem().list()
+const poems = await client.poem.list()
 ```
 
 
@@ -338,11 +331,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local moon = client:Moon(nil)
-moon:load({ planet_id = "earth", id = "luna" }, nil)
+local poem = client:poem()
+poem:load({ id = "example_id" })
 
--- moon:data_get() now returns the loaded moon data
--- moon:match_get() returns the last match criteria
+-- poem:data_get() now returns the loaded poem data
+-- poem:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration
