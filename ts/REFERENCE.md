@@ -109,7 +109,7 @@ Alias for `BleachPoemsSDK.test()`.
 ## PoemEntity
 
 ```ts
-const poem = client.poem
+const poem = client.Poem()
 ```
 
 ### Fields
@@ -127,7 +127,7 @@ const poem = client.poem
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.poem.list()
+const results = await client.Poem().list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -135,7 +135,7 @@ const results = await client.poem.list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.poem.load({ id: 'poem_id' })
+const result = await client.Poem().load({ id: 'poem_id' })
 ```
 
 ### Common Methods

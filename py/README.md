@@ -31,24 +31,28 @@ from bleachpoems_sdk import BleachPoemsSDK
 client = BleachPoemsSDK()
 ```
 
-### 2. List poems
+### 2. List poem records
+
+`list()` returns a `list` of records (each a `dict`) and raises on
+error — iterate it directly.
 
 ```python
 try:
-    result = client.poem.list()
-    for item in result:
-        d = item.data_get()
-        print(d["id"], d["name"])
+    poems = client.Poem().list({})
+    for poem in poems:
+        print(poem)
 except Exception as err:
     print(f"list failed: {err}")
 ```
 
 ### 3. Load a poem
 
+`load()` returns the bare record (a `dict`) and raises on error.
+
 ```python
 try:
-    result = client.poem.load({"id": "example_id"})
-    print(result)
+    poem = client.Poem().load({"id": "example_id"})
+    print(poem)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -96,8 +100,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = BleachPoemsSDK.test()
 
-result = client.poem.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+poem = client.Poem().load({"id": "test01"})
+# poem contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -232,7 +237,7 @@ API path: `/poems`
 
 ### Poem
 
-Create an instance: `const poem = client.poem`
+Create an instance: `poem = client.Poem()`
 
 #### Operations
 
@@ -251,14 +256,14 @@ Create an instance: `const poem = client.poem`
 
 #### Example: Load
 
-```ts
-const poem = await client.poem.load({ id: 'poem_id' })
+```python
+poem = client.Poem().load({"id": "poem_id"})
 ```
 
 #### Example: List
 
-```ts
-const poems = await client.poem.list()
+```python
+poems = client.Poem().list({})
 ```
 
 
@@ -332,7 +337,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-poem = client.poem
+poem = client.Poem()
 poem.load({"id": "example_id"})
 
 # poem.data_get() now returns the loaded poem data

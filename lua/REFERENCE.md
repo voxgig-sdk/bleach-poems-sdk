@@ -83,7 +83,7 @@ same parameters as `direct()`.
 ## PoemEntity
 
 ```lua
-local poem = client:poem(nil)
+local poem = client:Poem(nil)
 ```
 
 ### Fields
@@ -101,7 +101,7 @@ local poem = client:poem(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:poem():list()
+local results, err = client:Poem():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -109,7 +109,7 @@ local results, err = client:poem():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:poem():load({ id = "poem_id" })
+local result, err = client:Poem():load({ id = "poem_id" })
 ```
 
 ### Common Methods

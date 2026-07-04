@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:poem():list() / client:poem():load({ id = ... })
-function BleachPoemsSDK:poem(data)
+-- Idiomatic facade: client:Poem():list() / client:Poem():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function BleachPoemsSDK:Poem(data)
   local EntityMod = require("entity.poem_entity")
   if data == nil then
     if self._poem == nil then
@@ -253,12 +254,6 @@ function BleachPoemsSDK:poem(data)
     end
     return self._poem
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:poem() instead.
-function BleachPoemsSDK:Poem(data)
-  local EntityMod = require("entity.poem_entity")
   return EntityMod.new(self, data)
 end
 

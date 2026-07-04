@@ -233,10 +233,10 @@ class BleachPoemsSDK
 
     private $_poem = null;
 
-    // Idiomatic facade: $client->poem()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Poem() (PHP method
-    // names are case-insensitive).
-    public function poem($data = null)
+    // Canonical facade: $client->Poem()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->poem()
+    // resolves here too.
+    public function Poem($data = null)
     {
         require_once __DIR__ . '/entity/poem_entity.php';
         if ($data === null) {

@@ -86,7 +86,7 @@ same parameters as `direct()`. Raises on error.
 ## PoemEntity
 
 ```ruby
-poem = client.poem
+poem = client.Poem
 ```
 
 ### Fields
@@ -104,7 +104,7 @@ poem = client.poem
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.poem.list(nil)
+results = client.Poem.list(nil)
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -112,7 +112,7 @@ results = client.poem.list(nil)
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.poem.load({ "id" => "poem_id" })
+result = client.Poem.load({ "id" => "poem_id" })
 ```
 
 ### Common Methods

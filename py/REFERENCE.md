@@ -80,7 +80,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 ## PoemEntity
 
 ```python
-poem = client.poem
+poem = client.Poem()
 ```
 
 ### Fields
@@ -98,7 +98,9 @@ poem = client.poem
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.poem.list({})
+results = client.Poem().list({})
+for poem in results:
+    print(poem)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -106,7 +108,7 @@ results = client.poem.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.poem.load({"id": "poem_id"})
+result = client.Poem().load({"id": "poem_id"})
 ```
 
 ### Common Methods

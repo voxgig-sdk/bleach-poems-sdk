@@ -26,9 +26,11 @@ import { BleachPoemsSDK } from '@voxgig-sdk/bleach-poems'
 
 const client = new BleachPoemsSDK()
 
-// List all poems
-const poems = await client.poem.list()
-console.log(poems.data)
+// List all poems (returns Poem[])
+const poems = await client.Poem().list()
+for (const poem of poems) {
+  console.log(poem)
+}
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -83,12 +85,13 @@ from bleachpoems_sdk import BleachPoemsSDK
 
 client = BleachPoemsSDK()
 
-# List all poems
-poems = client.poem.list()
-print(poems)
+# List all poems (returns a list, raises on error)
+poems = client.Poem().list({})
+for poem in poems:
+    print(poem)
 
-# Load a specific poem
-poem = client.poem.load({"id": "example_id"})
+# Load a specific poem (returns the record, raises on error)
+poem = client.Poem().load({"id": "example_id"})
 print(poem)
 ```
 
@@ -100,12 +103,12 @@ require_once 'bleachpoems_sdk.php';
 
 $client = new BleachPoemsSDK();
 
-// List all poems (throws on error)
-$poems = $client->poem()->list();
+// List all poems (returns an array; throws on error)
+$poems = $client->Poem()->list();
 print_r($poems);
 
-// Load a specific poem
-$poem = $client->poem()->load(["id" => "example_id"]);
+// Load a specific poem (returns the bare record; throws on error)
+$poem = $client->Poem()->load(["id" => "example_id"]);
 print_r($poem);
 ```
 
@@ -128,12 +131,12 @@ require_relative "BleachPoems_sdk"
 
 client = BleachPoemsSDK.new
 
-# List all poems
-poems = client.poem.list
+# List all poems (returns an Array; raises on error)
+poems = client.Poem.list
 puts poems
 
-# Load a specific poem
-poem = client.poem.load({ "id" => "example_id" })
+# Load a specific poem (returns the bare record; raises on error)
+poem = client.Poem.load({ "id" => "example_id" })
 puts poem
 ```
 
@@ -145,11 +148,11 @@ local sdk = require("bleach-poems_sdk")
 local client = sdk.new()
 
 -- List all poems
-local poems, err = client:poem():list()
+local poems, err = client:Poem():list()
 print(poems)
 
 -- Load a specific poem
-local poem, err = client:poem():load({ id = "example_id" })
+local poem, err = client:Poem():load({ id = "example_id" })
 print(poem)
 ```
 
@@ -162,22 +165,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = BleachPoemsSDK.test()
-const result = await client.poem.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const poem = await client.Poem().load({ id: 'test01' })
+// poem is a bare Poem populated with mock data
+console.log(poem)
 ```
 
 ### Python
 
 ```python
 client = BleachPoemsSDK.test()
-result = client.poem.load({"id": "test01"})
+poem = client.Poem().load({"id": "test01"})
+print(poem)
 ```
 
 ### PHP
 
 ```php
-$client = BleachPoemsSDK::test();
-$result = $client->poem()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = BleachPoemsSDK::test([
+    "entity" => ["poem" => ["test01" => ["id" => "test01"]]],
+]);
+$poem = $client->Poem()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -192,15 +200,18 @@ result, err := client.Poem(nil).Load(
 ### Ruby
 
 ```ruby
-client = BleachPoemsSDK.test
-result = client.poem.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = BleachPoemsSDK.test({
+  "entity" => { "poem" => { "test01" => { "id" => "test01" } } },
+})
+poem = client.Poem.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:poem():load({ id = "test01" })
+local result, err = client:Poem():load({ id = "test01" })
 ```
 
 ## How it works
@@ -248,6 +259,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

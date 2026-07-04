@@ -85,7 +85,7 @@ Prepare a fetch definition without sending the request. Returns the
 ## PoemEntity
 
 ```php
-$poem = $client->poem();
+$poem = $client->Poem();
 ```
 
 ### Fields
@@ -103,7 +103,7 @@ $poem = $client->poem();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->poem()->list([]);
+$results = $client->Poem()->list([]);
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -111,7 +111,7 @@ $results = $client->poem()->list([]);
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->poem()->load(["id" => "poem_id"]);
+$result = $client->Poem()->load(["id" => "poem_id"]);
 ```
 
 ### Common Methods

@@ -208,13 +208,7 @@ class BleachPoemsSDK
   end
 
 
-  # Idiomatic facade: client.poem.list / client.poem.load({ "id" => ... })
-  def poem
-    require_relative 'entity/poem_entity'
-    @poem ||= PoemEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.poem instead.
+  # Canonical facade: client.Poem.list / client.Poem.load({ "id" => ... })
   def Poem(data = nil)
     require_relative 'entity/poem_entity'
     PoemEntity.new(self, data)

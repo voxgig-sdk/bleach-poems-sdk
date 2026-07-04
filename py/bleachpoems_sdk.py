@@ -220,25 +220,15 @@ class BleachPoemsSDK:
         }
 
 
-    @property
-    def poem(self):
-        """Idiomatic facade: client.poem.list() / client.poem.load({"id": ...})."""
-        from entity.poem_entity import PoemEntity
-        cached = getattr(self, "_poem", None)
-        if cached is None:
-            cached = PoemEntity(self, None)
-            self._poem = cached
-        return cached
-
-    def Poem(self, data=None):
-        # Deprecated: use client.poem instead.
+    def Poem(self, data=None) -> "PoemEntity":
+        """Entity factory: client.Poem().list({}) / client.Poem().load({"id": ...})."""
         from entity.poem_entity import PoemEntity
         return PoemEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "BleachPoemsSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -258,3 +248,9 @@ class BleachPoemsSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.poem_entity import PoemEntity

@@ -28,16 +28,14 @@ require_relative "BleachPoems_sdk"
 client = BleachPoemsSDK.new
 ```
 
-### 2. List poems
+### 2. List poem records
 
 ```ruby
 begin
-  result = client.poem.list
-  if result.is_a?(Array)
-    result.each do |item|
-      d = item.data_get
-      puts "#{d["id"]} #{d["name"]}"
-    end
+  # list returns an Array of Poem records — iterate directly.
+  poems = client.Poem.list
+  poems.each do |item|
+    puts "#{item["id"]} #{item["name"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -48,8 +46,9 @@ end
 
 ```ruby
 begin
-  result = client.poem.load({ "id" => "example_id" })
-  puts result
+  # load returns the bare Poem record (raises on error).
+  poem = client.Poem.load({ "id" => "example_id" })
+  puts poem
 rescue => err
   warn "load failed: #{err}"
 end
@@ -96,13 +95,17 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = BleachPoemsSDK.test
+client = BleachPoemsSDK.test({
+  "entity" => { "poem" => { "test01" => { "id" => "test01" } } },
+})
 
-result = client.poem.load({ "id" => "test01" })
-# result contains mock response data
+# load returns the bare mock record (raises on error).
+poem = client.Poem.load({ "id" => "test01" })
+puts poem
 ```
 
 ### Use a custom fetch function
@@ -236,7 +239,7 @@ API path: `/poems`
 
 ### Poem
 
-Create an instance: `const poem = client.poem`
+Create an instance: `poem = client.Poem`
 
 #### Operations
 
@@ -255,14 +258,16 @@ Create an instance: `const poem = client.poem`
 
 #### Example: Load
 
-```ts
-const poem = await client.poem.load({ id: 'poem_id' })
+```ruby
+# load returns the bare Poem record (raises on error).
+poem = client.Poem.load({ "id" => "poem_id" })
 ```
 
 #### Example: List
 
-```ts
-const poems = await client.poem.list()
+```ruby
+# list returns an Array of Poem records (raises on error).
+poems = client.Poem.list
 ```
 
 
@@ -337,7 +342,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-poem = client.poem
+poem = client.Poem
 poem.load({ "id" => "example_id" })
 
 # poem.data_get now returns the loaded poem data

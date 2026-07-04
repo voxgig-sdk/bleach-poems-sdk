@@ -29,18 +29,16 @@ require_once 'bleachpoems_sdk.php';
 $client = new BleachPoemsSDK();
 ```
 
-### 2. List poems
+### 2. List poem records
 
 ```php
 try {
-    $result = $client->poem()->list();
-    if (is_array($result)) {
-        foreach ($result as $item) {
-            $d = $item->data_get();
-            echo $d["id"] . " " . $d["name"] . "\n";
-        }
+    // list() returns an array of Poem records — iterate directly.
+    $poems = $client->Poem()->list();
+    foreach ($poems as $item) {
+        echo $item["id"] . " " . $item["name"] . "\n";
     }
-} catch (\Exception $err) {
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -49,9 +47,10 @@ try {
 
 ```php
 try {
-    $result = $client->poem()->load(["id" => "example_id"]);
-    print_r($result);
-} catch (\Exception $err) {
+    // load() returns the bare Poem record (throws on error).
+    $poem = $client->Poem()->load(["id" => "example_id"]);
+    print_r($poem);
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -97,13 +96,17 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = BleachPoemsSDK::test();
+$client = BleachPoemsSDK::test([
+    "entity" => ["poem" => ["test01" => ["id" => "test01"]]],
+]);
 
-$result = $client->poem()->load(["id" => "test01"]);
-// $result contains mock response data
+// load() returns the bare mock record (throws on error).
+$poem = $client->Poem()->load(["id" => "test01"]);
+print_r($poem);
 ```
 
 ### Use a custom fetch function
@@ -241,7 +244,7 @@ API path: `/poems`
 
 ### Poem
 
-Create an instance: `const poem = client.poem`
+Create an instance: `$poem = $client->Poem();`
 
 #### Operations
 
@@ -260,14 +263,16 @@ Create an instance: `const poem = client.poem`
 
 #### Example: Load
 
-```ts
-const poem = await client.poem.load({ id: 'poem_id' })
+```php
+// load() returns the bare Poem record (throws on error).
+$poem = $client->Poem()->load(["id" => "poem_id"]);
 ```
 
 #### Example: List
 
-```ts
-const poems = await client.poem.list()
+```php
+// list() returns an array of Poem records (throws on error).
+$poems = $client->Poem()->list();
 ```
 
 
@@ -342,7 +347,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$poem = $client->poem();
+$poem = $client->Poem();
 $poem->load(["id" => "example_id"]);
 
 // $poem->dataGet() now returns the loaded poem data
