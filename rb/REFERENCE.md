@@ -8,7 +8,7 @@ Complete API reference for the BleachPoems Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'bleach-poems_sdk'
+require_relative 'BleachPoems_sdk'
 
 client = BleachPoemsSDK.new(options)
 ```
@@ -93,18 +93,18 @@ poem = client.Poem
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `line` | ``$ARRAY`` | Yes |  |
-| `title` | ``$STRING`` | Yes |  |
-| `volume` | ``$INTEGER`` | Yes |  |
+| `line` | `Array` | Yes |  |
+| `title` | `String` | Yes |  |
+| `volume` | `Integer` | Yes |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Poem.list(nil)
+results = client.Poem.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`

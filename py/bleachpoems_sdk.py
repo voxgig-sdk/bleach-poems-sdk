@@ -221,7 +221,7 @@ class BleachPoemsSDK:
 
 
     def Poem(self, data=None) -> "PoemEntity":
-        """Entity factory: client.Poem().list({}) / client.Poem().load({"id": ...})."""
+        """Entity factory: client.Poem().list() / client.Poem().load({"id": ...})."""
         from entity.poem_entity import PoemEntity
         return PoemEntity(self, data)
 

@@ -8,7 +8,7 @@ Complete API reference for the BleachPoems PHP SDK.
 ### Constructor
 
 ```php
-require_once __DIR__ . '/bleach-poems_sdk.php';
+require_once __DIR__ . '/bleachpoems_sdk.php';
 
 $client = new BleachPoemsSDK($options);
 ```
@@ -45,11 +45,11 @@ $client = BleachPoemsSDK::test();
 
 Create a new `PoemEntity` instance. Pass `null` for no initial data.
 
-#### `optionsMap(): array`
+#### `options_map(): array`
 
 Return a deep copy of the current SDK options.
 
-#### `getUtility(): ProjectNameUtility`
+#### `get_utility(): BleachPoemsUtility`
 
 Return a copy of the SDK utility object.
 
@@ -92,18 +92,18 @@ $poem = $client->Poem();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `line` | ``$ARRAY`` | Yes |  |
-| `title` | ``$STRING`` | Yes |  |
-| `volume` | ``$INTEGER`` | Yes |  |
+| `line` | `array` | Yes |  |
+| `title` | `string` | Yes |  |
+| `volume` | `int` | Yes |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Poem()->list([]);
+$results = $client->Poem()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -116,19 +116,19 @@ $result = $client->Poem()->load(["id" => "poem_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -137,7 +137,7 @@ Set the entity match criteria.
 Create a new `PoemEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 

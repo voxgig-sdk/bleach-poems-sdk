@@ -34,7 +34,7 @@ PoemLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Poem#list (any subset of Poem fields).
+# Request payload for Poem#list.
 #
 # @!attribute [rw] line
 #   @return [Array, nil]

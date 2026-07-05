@@ -20,8 +20,7 @@ type PoemLoadMatch struct {
 	Id int `json:"id"`
 }
 
-// PoemListMatch mirrors the poem fields as an all-optional match
-// filter (Go analog of Partial<Poem>).
+// PoemListMatch is the typed request payload for Poem.ListTyped.
 type PoemListMatch struct {
 	Line *[]any `json:"line,omitempty"`
 	Title *string `json:"title,omitempty"`

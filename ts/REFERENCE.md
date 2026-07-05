@@ -116,9 +116,9 @@ const poem = client.Poem()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `line` | ``$ARRAY`` | Yes |  |
-| `title` | ``$STRING`` | Yes |  |
-| `volume` | ``$INTEGER`` | Yes |  |
+| `line` | `any[]` | Yes |  |
+| `title` | `string` | Yes |  |
+| `volume` | `number` | Yes |  |
 
 ### Operations
 
@@ -135,7 +135,7 @@ const results = await client.Poem().list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Poem().load({ id: 'poem_id' })
+const result = await client.Poem().load({ id: 1 })
 ```
 
 ### Common Methods

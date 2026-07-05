@@ -15,6 +15,9 @@
 ---@field id number
 
 ---@class PoemListMatch
+---@field line? table
+---@field title? string
+---@field volume? number
 
 local M = {}
 

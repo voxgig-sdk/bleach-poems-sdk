@@ -8,7 +8,7 @@ Complete API reference for the BleachPoems Python SDK.
 ### Constructor
 
 ```python
-from bleach-poems_sdk import BleachPoemsSDK
+from bleachpoems_sdk import BleachPoemsSDK
 
 client = BleachPoemsSDK(options)
 ```
@@ -87,18 +87,18 @@ poem = client.Poem()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `line` | ``$ARRAY`` | Yes |  |
-| `title` | ``$STRING`` | Yes |  |
-| `volume` | ``$INTEGER`` | Yes |  |
+| `line` | `list` | Yes |  |
+| `title` | `str` | Yes |  |
+| `volume` | `int` | Yes |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Poem().list({})
+results = client.Poem().list()
 for poem in results:
     print(poem)
 ```

@@ -97,9 +97,9 @@ poem := client.Poem(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `line` | ``$ARRAY`` | Yes |  |
-| `title` | ``$STRING`` | Yes |  |
-| `volume` | ``$INTEGER`` | Yes |  |
+| `line` | `[]any` | Yes |  |
+| `title` | `string` | Yes |  |
+| `volume` | `int` | Yes |  |
 
 ### Operations
 

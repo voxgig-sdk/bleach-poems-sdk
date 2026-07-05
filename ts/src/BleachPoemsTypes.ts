@@ -15,5 +15,9 @@ export interface PoemLoadMatch {
   id: number
 }
 
-export type PoemListMatch = Partial<Poem>
+export interface PoemListMatch {
+  line?: any[]
+  title?: string
+  volume?: number
+}
 

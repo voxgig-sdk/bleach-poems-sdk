@@ -26,7 +26,7 @@ class PoemLoadMatch
     public int $id;
 }
 
-/** Match filter for Poem#list (any subset of Poem fields). */
+/** Request payload for Poem#list. */
 class PoemListMatch
 {
     public ?array $line = null;
