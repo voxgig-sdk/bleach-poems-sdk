@@ -304,7 +304,7 @@ Create an instance: `poem := client.Poem(nil)`
 #### Example: Load
 
 ```go
-poem, err := client.Poem(nil).Load(map[string]any{"id": "poem_id"}, nil)
+poem, err := client.Poem(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }

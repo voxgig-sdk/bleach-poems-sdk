@@ -109,7 +109,7 @@ local results, err = client:Poem():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Poem():load({ id = "poem_id" })
+local result, err = client:Poem():load({ id = 1 })
 ```
 
 ### Common Methods

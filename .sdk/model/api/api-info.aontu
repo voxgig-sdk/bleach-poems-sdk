@@ -23,9 +23,9 @@ main: {
           url: "http://localhost:8080"
         }
       ]
+      summary: "This API provides a JSON representation of all poems from the Bleach series, encompassing volumes 1 to 74."
       title: "Bleach Poems API"
       version: "2.0.0"
+      website: "https://bleach-poems.onrender.com"
     }
   }
-}
-

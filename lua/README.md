@@ -50,7 +50,7 @@ end
 ### 3. Load a poem
 
 ```lua
-local poem, err = client:Poem():load({ id = "example_id" })
+local poem, err = client:Poem():load({ id = 1 })
 if err then error(err) end
 print(poem)
 ```
@@ -276,7 +276,7 @@ Create an instance: `local poem = client:Poem(nil)`
 #### Example: Load
 
 ```lua
-local poem, err = client:Poem():load({ id = "poem_id" })
+local poem, err = client:Poem():load({ id = 1 })
 ```
 
 #### Example: List

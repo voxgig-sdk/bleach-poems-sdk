@@ -49,7 +49,7 @@ end
 ```ruby
 begin
   # load returns the bare Poem record (raises on error).
-  poem = client.Poem.load({ "id" => "example_id" })
+  poem = client.Poem.load({ "id" => 1 })
   puts poem
 rescue => err
   warn "load failed: #{err}"
@@ -288,7 +288,7 @@ Create an instance: `poem = client.Poem`
 
 ```ruby
 # load returns the bare Poem record (raises on error).
-poem = client.Poem.load({ "id" => "poem_id" })
+poem = client.Poem.load({ "id" => 1 })
 ```
 
 #### Example: List

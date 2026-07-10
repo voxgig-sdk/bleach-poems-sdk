@@ -112,7 +112,7 @@ results = client.Poem.list
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Poem.load({ "id" => "poem_id" })
+result = client.Poem.load({ "id" => 1 })
 ```
 
 ### Common Methods

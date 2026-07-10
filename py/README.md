@@ -56,7 +56,7 @@ except Exception as err:
 
 ```python
 try:
-    poem = client.Poem().load({"id": "example_id"})
+    poem = client.Poem().load({"id": 1})
     print(poem)
 except Exception as err:
     print(f"load failed: {err}")
@@ -290,7 +290,7 @@ Create an instance: `poem = client.Poem()`
 #### Example: Load
 
 ```python
-poem = client.Poem().load({"id": "poem_id"})
+poem = client.Poem().load({"id": 1})
 ```
 
 #### Example: List

@@ -50,7 +50,7 @@ try {
 ```php
 try {
     // load() returns the bare Poem record (throws on error).
-    $poem = $client->Poem()->load(["id" => "example_id"]);
+    $poem = $client->Poem()->load(["id" => 1]);
     print_r($poem);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
@@ -298,7 +298,7 @@ Create an instance: `$poem = $client->Poem();`
 
 ```php
 // load() returns the bare Poem record (throws on error).
-$poem = $client->Poem()->load(["id" => "poem_id"]);
+$poem = $client->Poem()->load(["id" => 1]);
 ```
 
 #### Example: List

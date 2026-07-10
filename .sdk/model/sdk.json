@@ -6,9 +6,6 @@
     },
     "kit": {
       "config": {
-        "auth": {
-          "prefix": "Bearer"
-        },
         "docs_order": [
           "ts",
           "py",
@@ -284,6 +281,7 @@
           "name": "All rights to VIZ",
           "url": "https://codeberg.org/b_n_b/bleach-poems"
         },
+        "meta_source": "https://www.freepublicapis.com",
         "servers": [
           {
             "description": "Public instance",
@@ -294,8 +292,10 @@
             "url": "http://localhost:8080"
           }
         ],
+        "summary": "This API provides a JSON representation of all poems from the Bleach series, encompassing volumes 1 to 74.",
         "title": "Bleach Poems API",
-        "version": "2.0.0"
+        "version": "2.0.0",
+        "website": "https://bleach-poems.onrender.com"
       },
       "option": {},
       "target": {
@@ -348,6 +348,9 @@
           },
           "name": "go-cli",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
@@ -398,6 +401,9 @@
           },
           "name": "go-mcp",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },

@@ -108,7 +108,7 @@ for poem in results:
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Poem().load({"id": "poem_id"})
+result = client.Poem().load({"id": 1})
 ```
 
 ### Common Methods
