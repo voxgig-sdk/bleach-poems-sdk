@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- BleachPoems SDK exists test
 
 local sdk = require("bleach-poems_sdk")
 
