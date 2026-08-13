@@ -87,7 +87,7 @@ poem = client.Poem()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `line` | `list` | Yes |  |
+| `lines` | `list` | Yes |  |
 | `title` | `str` | Yes |  |
 | `volume` | `int` | Yes |  |
 

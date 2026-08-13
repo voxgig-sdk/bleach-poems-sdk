@@ -38,9 +38,18 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = BleachPoemsSDK.test()
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = BleachPoemsSDK.test({
+  entity: {
+    poem: {
+      test01: { id: 'test01' },
+    },
+  },
+})
 const poems = await client.Poem().list()
-// poems is an array of bare Poem records populated with mock data
+// poems is an array of Poem entities, populated with mock data
+// — call poems[0].data() for the record itself
 console.log(poems)
 ```
 
@@ -110,7 +119,7 @@ import { BleachPoemsSDK } from '@voxgig-sdk/bleach-poems'
 
 const client = new BleachPoemsSDK()
 
-// List all poems (returns Poem[])
+// List all poems (returns PoemEntity[] — .data() for the record)
 const poems = await client.Poem().list()
 for (const poem of poems) {
   console.log(poem)
@@ -191,7 +200,7 @@ $client = new BleachPoemsSDK();
 $poems = $client->Poem()->list();
 print_r($poems);
 
-// Load a specific poem (returns the bare record; throws on error)
+// Load a specific poem (returns the ENTITY; call data_get() for the record; throws on error)
 $poem = $client->Poem()->load(["id" => 1]);
 print_r($poem);
 ```
@@ -222,7 +231,7 @@ client = BleachPoemsSDK.new
 poems = client.Poem.list
 puts poems
 
-# Load a specific poem (returns the bare record; raises on error)
+# Load a specific poem (returns the ENTITY; call data_get for the record)
 poem = client.Poem.load({ "id" => 1 })
 puts poem
 ```
@@ -359,6 +368,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://codeberg.org/b_n_b/bleach-poems](https://codeberg.org/b_n_b/bleach-poems)
 

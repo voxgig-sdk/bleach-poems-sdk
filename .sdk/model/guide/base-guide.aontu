@@ -8,6 +8,7 @@ guide: {
   entity: poem: {
     path: "/poems": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.poems`")|top
     }
     path: "/poems/{volume}": {
       rename: param: "volume": *"id"
@@ -15,6 +16,7 @@ guide: {
     }
     path: "/random": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.lines`")|top
     }
   }
 

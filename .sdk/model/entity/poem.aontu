@@ -6,7 +6,7 @@ main: kit: entity: poem: {
 
   fields: [
     {
-      name: "line"
+      name: "lines"
       req: true
       type: "`$ARRAY`"
     }
@@ -35,7 +35,7 @@ main: kit: entity: poem: {
           ]
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.poems`"
           }
         }
         {
@@ -46,7 +46,7 @@ main: kit: entity: poem: {
           ]
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.lines`"
           }
         }
       ]

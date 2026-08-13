@@ -92,7 +92,7 @@ $poem = $client->Poem();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `line` | `array` | Yes |  |
+| `lines` | `array` | Yes |  |
 | `title` | `string` | Yes |  |
 | `volume` | `int` | Yes |  |
 

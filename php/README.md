@@ -38,7 +38,7 @@ try {
     // list() returns an array of Poem records — iterate directly.
     $poems = $client->Poem()->list();
     foreach ($poems as $item) {
-        echo $item["line"] . "\n";
+        echo $item["lines"] . "\n";
     }
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
@@ -49,7 +49,7 @@ try {
 
 ```php
 try {
-    // load() returns the bare Poem record (throws on error).
+    // load() returns the ENTITY — call data_get() for the Poem record (throws on error).
     $poem = $client->Poem()->load(["id" => 1]);
     print_r($poem);
 } catch (\Throwable $err) {
@@ -140,7 +140,8 @@ $client = BleachPoemsSDK::test([
     "entity" => ["poem" => ["test01" => ["id" => "test01"]]],
 ]);
 
-// Entity ops return the bare mock record (throws on error).
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
 $poem = $client->Poem()->list();
 print_r($poem);
 ```
@@ -240,7 +241,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -262,7 +263,7 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `line` |  |
+| `lines` |  |
 | `title` |  |
 | `volume` |  |
 
@@ -290,14 +291,14 @@ Create an instance: `$poem = $client->Poem();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `line` | `array` |  |
+| `lines` | `array` |  |
 | `title` | `string` |  |
 | `volume` | `int` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Poem record (throws on error).
+// load() returns the ENTITY — call data_get() for the Poem record (throws on error).
 $poem = $client->Poem()->load(["id" => 1]);
 ```
 

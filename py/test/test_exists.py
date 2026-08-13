@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# BleachPoems SDK exists test
 
 import pytest
 from bleachpoems_sdk import BleachPoemsSDK

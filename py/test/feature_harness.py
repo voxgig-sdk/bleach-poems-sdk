@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import BleachPoemsControl
-from core.error import BleachPoemsError
-from core.result import BleachPoemsResult
-from core.spec import BleachPoemsSpec
+from bleachpoems_sdk.config import make_config
+from bleachpoems_sdk.features import _make_feature
+from bleachpoems_sdk.core.control import BleachPoemsControl
+from bleachpoems_sdk.core.error import BleachPoemsError
+from bleachpoems_sdk.core.result import BleachPoemsResult
+from bleachpoems_sdk.core.spec import BleachPoemsSpec
 
 
 # True when this SDK was generated with the named feature.

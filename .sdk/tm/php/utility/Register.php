@@ -23,6 +23,7 @@ require_once __DIR__ . '/MakeUrl.php';
 require_once __DIR__ . '/Param.php';
 require_once __DIR__ . '/PrepareAuth.php';
 require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/Graphql.php';
 require_once __DIR__ . '/PrepareHeaders.php';
 require_once __DIR__ . '/PrepareMethod.php';
 require_once __DIR__ . '/PrepareParams.php';
@@ -59,6 +60,8 @@ BleachPoemsUtility::setRegistrar(function (BleachPoemsUtility $u): void {
     $u->prepare_params = [BleachPoemsPrepareParams::class, 'call'];
     $u->prepare_path = [BleachPoemsPreparePath::class, 'call'];
     $u->prepare_query = [BleachPoemsPrepareQuery::class, 'call'];
+    $u->graphql_body = [BleachPoemsGraphql::class, 'body'];
+    $u->graphql_errors = [BleachPoemsGraphql::class, 'errors'];
     $u->result_basic = [BleachPoemsResultBasic::class, 'call'];
     $u->result_body = [BleachPoemsResultBody::class, 'call'];
     $u->result_headers = [BleachPoemsResultHeaders::class, 'call'];

@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from bleachpoems_sdk.utility.voxgig_struct import voxgig_struct as vs
 from bleachpoems_sdk import BleachPoemsSDK
-from core import helpers
+from bleachpoems_sdk.core import helpers
 from test import runner
 
 
@@ -102,11 +102,11 @@ def _poem_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "BLEACHPOEMS_TEST_POEM_ENTID": {},
-        "BLEACHPOEMS_TEST_LIVE": "FALSE",
+        "BLEACH_POEMS_TEST_POEM_ENTID": {},
+        "BLEACH_POEMS_TEST_LIVE": "FALSE",
     })
 
-    live = env.get("BLEACHPOEMS_TEST_LIVE") == "TRUE"
+    live = env.get("BLEACH_POEMS_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {

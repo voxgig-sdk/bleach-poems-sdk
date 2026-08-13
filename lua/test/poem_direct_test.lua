@@ -113,11 +113,11 @@ function poem_direct_setup(mockres)
   local calls = {}
 
   local env = runner.env_override({
-    ["BLEACHPOEMS_TEST_POEM_ENTID"] = {},
-    ["BLEACHPOEMS_TEST_LIVE"] = "FALSE",
+    ["BLEACH_POEMS_TEST_POEM_ENTID"] = {},
+    ["BLEACH_POEMS_TEST_LIVE"] = "FALSE",
   })
 
-  local live = env["BLEACHPOEMS_TEST_LIVE"] == "TRUE"
+  local live = env["BLEACH_POEMS_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {

@@ -37,7 +37,7 @@ begin
   # list returns an Array of Poem records — iterate directly.
   poems = client.Poem.list
   poems.each do |item|
-    puts "#{item["line"]}"
+    puts "#{item["lines"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -48,7 +48,7 @@ end
 
 ```ruby
 begin
-  # load returns the bare Poem record (raises on error).
+  # load returns the ENTITY — call data_get for the Poem record (raises on error).
   poem = client.Poem.load({ "id" => 1 })
   puts poem
 rescue => err
@@ -134,7 +134,8 @@ client = BleachPoemsSDK.test({
   "entity" => { "poem" => { "test01" => { "id" => "test01" } } },
 })
 
-# Entity ops return the bare mock record (raises on error).
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
 poem = client.Poem.list()
 puts poem
 ```
@@ -252,7 +253,7 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `line` |  |
+| `lines` |  |
 | `title` |  |
 | `volume` |  |
 
@@ -280,14 +281,14 @@ Create an instance: `poem = client.Poem`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `line` | `Array` |  |
+| `lines` | `Array` |  |
 | `title` | `String` |  |
 | `volume` | `Integer` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Poem record (raises on error).
+# load returns the ENTITY — call data_get for the Poem record (raises on error).
 poem = client.Poem.load({ "id" => 1 })
 ```
 

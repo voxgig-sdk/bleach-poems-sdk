@@ -241,7 +241,7 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `line` |  |
+| `lines` |  |
 | `title` |  |
 | `volume` |  |
 
@@ -269,7 +269,7 @@ Create an instance: `local poem = client:Poem(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `line` | `table` |  |
+| `lines` | `table` |  |
 | `title` | `string` |  |
 | `volume` | `number` |  |
 

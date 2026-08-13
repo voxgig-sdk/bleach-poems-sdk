@@ -7,7 +7,7 @@
 -- edit by hand.
 
 ---@class Poem
----@field line table
+---@field lines table
 ---@field title string
 ---@field volume number
 
@@ -15,7 +15,7 @@
 ---@field id number
 
 ---@class PoemListMatch
----@field line? table
+---@field lines? table
 ---@field title? string
 ---@field volume? number
 

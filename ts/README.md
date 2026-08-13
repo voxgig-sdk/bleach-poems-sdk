@@ -35,7 +35,9 @@ const client = new BleachPoemsSDK()
 
 ### 2. List poem records
 
-`list()` resolves to an array of Poem objects — iterate it directly:
+`list()` resolves to an array of Poem ENTITIES — every operation
+resolves to entities, not raw records. Iterate them directly, and call
+`.data()` on one for the record it holds:
 
 ```ts
 const poems = await client.Poem().list()
@@ -133,7 +135,8 @@ Create a mock client for unit testing — no server required:
 const client = BleachPoemsSDK.test()
 
 const poem = await client.Poem().list()
-// poem is a bare entity populated with mock response data
+// poem is the entity, populated with mock response data
+// — call poem.data() for the record itself
 console.log(poem)
 ```
 
@@ -299,7 +302,7 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `line` |  |
+| `lines` |  |
 | `title` |  |
 | `volume` |  |
 
@@ -327,7 +330,7 @@ Create an instance: `const poem = client.Poem()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `line` | `any[]` |  |
+| `lines` | `any[]` |  |
 | `title` | `string` |  |
 | `volume` | `number` |  |
 

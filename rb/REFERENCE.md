@@ -93,7 +93,7 @@ poem = client.Poem
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `line` | `Array` | Yes |  |
+| `lines` | `Array` | Yes |  |
 | `title` | `String` | Yes |  |
 | `volume` | `Integer` | Yes |  |
 

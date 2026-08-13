@@ -43,8 +43,8 @@ class BleachPoemsTestRunner
 
     public static function env_override(array $m): array
     {
-        $live = self::getenv('BLEACHPOEMS_TEST_LIVE');
-        $override = self::getenv('BLEACHPOEMS_TEST_OVERRIDE');
+        $live = self::getenv('BLEACH_POEMS_TEST_LIVE');
+        $override = self::getenv('BLEACH_POEMS_TEST_OVERRIDE');
 
         if ($live === 'TRUE' || $override === 'TRUE') {
             foreach (array_keys($m) as $key) {
@@ -63,9 +63,9 @@ class BleachPoemsTestRunner
             }
         }
 
-        $explain = self::getenv('BLEACHPOEMS_TEST_EXPLAIN');
+        $explain = self::getenv('BLEACH_POEMS_TEST_EXPLAIN');
         if ($explain !== null && $explain !== '') {
-            $m['BLEACHPOEMS_TEST_EXPLAIN'] = $explain;
+            $m['BLEACH_POEMS_TEST_EXPLAIN'] = $explain;
         }
 
         return $m;

@@ -23,8 +23,8 @@ module BleachPoemsTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("BLEACHPOEMS_TEST_LIVE")
-    override = getenv("BLEACHPOEMS_TEST_OVERRIDE")
+    live = getenv("BLEACH_POEMS_TEST_LIVE")
+    override = getenv("BLEACH_POEMS_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module BleachPoemsTestRunner
       end
     end
 
-    explain = getenv("BLEACHPOEMS_TEST_EXPLAIN")
-    m["BLEACHPOEMS_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("BLEACH_POEMS_TEST_EXPLAIN")
+    m["BLEACH_POEMS_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

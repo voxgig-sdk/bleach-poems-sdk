@@ -2,19 +2,19 @@
   "existing": {
     "poem": {
       "POEM00": {
-        "line": [],
+        "lines": [],
         "title": "s1f",
         "volume": "s20",
         "id": "POEM00"
       },
       "POEM01": {
-        "line": [],
+        "lines": [],
         "title": "s3d",
         "volume": "s3e",
         "id": "POEM01"
       },
       "POEM02": {
-        "line": [],
+        "lines": [],
         "title": "s5b",
         "volume": "s5c",
         "id": "POEM02"
@@ -24,7 +24,7 @@
   "new": {
     "poem": {
       "poem_ref01": {
-        "line": [],
+        "lines": [],
         "title": "s79",
         "volume": "s7a"
       }

@@ -90,7 +90,7 @@ local poem = client:Poem(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `line` | `table` | Yes |  |
+| `lines` | `table` | Yes |  |
 | `title` | `string` | Yes |  |
 | `volume` | `number` | Yes |  |
 

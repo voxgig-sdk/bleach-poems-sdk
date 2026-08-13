@@ -16,11 +16,11 @@
 import pytest
 
 from bleachpoems_sdk import BleachPoemsSDK
-from core.error import BleachPoemsError
-from core.result import BleachPoemsResult
-from core.response import BleachPoemsResponse
-from core.spec import BleachPoemsSpec
-from feature.base_feature import BleachPoemsBaseFeature
+from bleachpoems_sdk.core.error import BleachPoemsError
+from bleachpoems_sdk.core.result import BleachPoemsResult
+from bleachpoems_sdk.core.response import BleachPoemsResponse
+from bleachpoems_sdk.core.spec import BleachPoemsSpec
+from bleachpoems_sdk.feature.base_feature import BleachPoemsBaseFeature
 
 
 def _client():

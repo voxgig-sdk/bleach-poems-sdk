@@ -19,11 +19,15 @@ import {
 describe('PoemDirect', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when BLEACHPOEMS_TEST_LIVE=TRUE.
-  afterEach(liveDelay('BLEACHPOEMS_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when BLEACH_POEMS_TEST_LIVE=TRUE.
+  afterEach(liveDelay('BLEACH_POEMS_TEST_LIVE'))
 
   test('direct-exists', async () => {
     const sdk = new BleachPoemsSDK({
+      // Concrete base: a live construction must satisfy any server
+      // variables a templated base URL declares; overriding base with a
+      // literal (as the direct flow tests do) sidesteps the requirement.
+      base: 'http://localhost:8080',
       system: { fetch: async () => ({}) }
     })
     assert('function' === typeof sdk.direct)
@@ -115,17 +119,17 @@ function directSetup(mockres?: any) {
   const calls: any[] = []
 
   const env = envOverride({
-    'BLEACHPOEMS_TEST_POEM_ENTID': {},
-    'BLEACHPOEMS_TEST_LIVE': 'FALSE',
+    'BLEACH_POEMS_TEST_POEM_ENTID': {},
+    'BLEACH_POEMS_TEST_LIVE': 'FALSE',
   })
 
-  const live = 'TRUE' === env.BLEACHPOEMS_TEST_LIVE
+  const live = 'TRUE' === env.BLEACH_POEMS_TEST_LIVE
 
   if (live) {
     const client = new BleachPoemsSDK({
     })
 
-    let idmap: any = env['BLEACHPOEMS_TEST_POEM_ENTID']
+    let idmap: any = env['BLEACH_POEMS_TEST_POEM_ENTID']
     if ('string' === typeof idmap && idmap.startsWith('{')) {
       idmap = JSON.parse(idmap)
     }

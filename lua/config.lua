@@ -26,7 +26,7 @@ local function make_config()
         ["fields"] = {
           {
             ["active"] = true,
-            ["name"] = "line",
+            ["name"] = "lines",
             ["req"] = true,
             ["type"] = "`$ARRAY`",
             ["index$"] = 0,
@@ -55,6 +55,7 @@ local function make_config()
               {
                 ["active"] = true,
                 ["args"] = {},
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/poems",
                 ["parts"] = {
@@ -63,13 +64,14 @@ local function make_config()
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
+                  ["res"] = "`body.poems`",
                 },
                 ["index$"] = 0,
               },
               {
                 ["active"] = true,
                 ["args"] = {},
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/random",
                 ["parts"] = {
@@ -78,7 +80,7 @@ local function make_config()
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
+                  ["res"] = "`body.lines`",
                 },
                 ["index$"] = 1,
               },
@@ -105,6 +107,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/poems/{volume}",
                 ["parts"] = {

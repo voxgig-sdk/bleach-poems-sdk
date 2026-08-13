@@ -269,7 +269,7 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"line"` |  |
+| `"lines"` |  |
 | `"title"` |  |
 | `"volume"` |  |
 
@@ -297,7 +297,7 @@ Create an instance: `poem := client.Poem(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `line` | `[]any` |  |
+| `lines` | `[]any` |  |
 | `title` | `string` |  |
 | `volume` | `int` |  |
 

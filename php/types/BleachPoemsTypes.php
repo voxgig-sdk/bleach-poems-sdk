@@ -15,7 +15,7 @@ declare(strict_types=1);
 /** Poem entity data model. */
 class Poem
 {
-    public array $line;
+    public array $lines;
     public string $title;
     public int $volume;
 }
@@ -29,7 +29,7 @@ class PoemLoadMatch
 /** Request payload for Poem#list. */
 class PoemListMatch
 {
-    public ?array $line = null;
+    public ?array $lines = null;
     public ?string $title = null;
     public ?int $volume = null;
 }

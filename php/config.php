@@ -32,7 +32,7 @@ class BleachPoemsConfig
           'fields' => [
             [
               'active' => true,
-              'name' => 'line',
+              'name' => 'lines',
               'req' => true,
               'type' => '`$ARRAY`',
               'index$' => 0,
@@ -61,6 +61,7 @@ class BleachPoemsConfig
                 [
                   'active' => true,
                   'args' => [],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/poems',
                   'parts' => [
@@ -69,13 +70,14 @@ class BleachPoemsConfig
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body`',
+                    'res' => '`body.poems`',
                   ],
                   'index$' => 0,
                 ],
                 [
                   'active' => true,
                   'args' => [],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/random',
                   'parts' => [
@@ -84,7 +86,7 @@ class BleachPoemsConfig
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body`',
+                    'res' => '`body.lines`',
                   ],
                   'index$' => 1,
                 ],
@@ -111,6 +113,7 @@ class BleachPoemsConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/poems/{volume}',
                   'parts' => [

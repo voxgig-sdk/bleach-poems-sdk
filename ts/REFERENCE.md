@@ -116,7 +116,7 @@ const poem = client.Poem()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `line` | `any[]` | Yes |  |
+| `lines` | `any[]` | Yes |  |
 | `title` | `string` | Yes |  |
 | `volume` | `number` | Yes |  |
 
