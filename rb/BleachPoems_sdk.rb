@@ -28,7 +28,7 @@ class BleachPoemsSDK
     utility = BleachPoemsUtility.new
     @_utility = utility
 
-    config = BleachPoemsConfig.make_config
+    config = BleachPoemsConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,

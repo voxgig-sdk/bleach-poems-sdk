@@ -40,7 +40,7 @@ class BleachPoemsSDK
         $utility = new BleachPoemsUtility();
         $this->_utility = $utility;
 
-        $config = BleachPoemsConfig::make_config();
+        $config = BleachPoemsConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,
