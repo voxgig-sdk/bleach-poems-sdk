@@ -253,9 +253,9 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `lines` |  |
-| `title` |  |
-| `volume` |  |
+| `lines` | The lines of the poem |
+| `title` | The title of the poem |
+| `volume` | The volume number of the Bleach manga |
 
 Operations: List, Load.
 
@@ -281,9 +281,9 @@ Create an instance: `poem = client.Poem`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `lines` | `Array` |  |
-| `title` | `String` |  |
-| `volume` | `Integer` |  |
+| `lines` | `Array` | The lines of the poem |
+| `title` | `String` | The title of the poem |
+| `volume` | `Integer` | The volume number of the Bleach manga |
 
 #### Example: Load
 

@@ -9,7 +9,7 @@ The API is exposed as capitalised, semantic **Entities** — e.g.
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go`, `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb` — see
 > the [top-level README](../README.md).
 
 
@@ -302,9 +302,9 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `lines` |  |
-| `title` |  |
-| `volume` |  |
+| `lines` | The lines of the poem |
+| `title` | The title of the poem |
+| `volume` | The volume number of the Bleach manga |
 
 Operations: list, load.
 
@@ -330,9 +330,9 @@ Create an instance: `const poem = client.Poem()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `lines` | `any[]` |  |
-| `title` | `string` |  |
-| `volume` | `number` |  |
+| `lines` | `any[]` | The lines of the poem |
+| `title` | `string` | The title of the poem |
+| `volume` | `number` | The volume number of the Bleach manga |
 
 #### Example: Load
 

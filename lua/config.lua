@@ -7,6 +7,9 @@ local function make_config()
   return {
     main = {
       name = "BleachPoems",
+      slug = "bleach-poems",
+      version = "0.0.1",
+      target = "lua",
     },
     feature = {
       ["test"] = {
@@ -30,16 +33,19 @@ local function make_config()
           {
             ["name"] = "lines",
             ["req"] = true,
+            ["short"] = "The lines of the poem",
             ["type"] = "`$ARRAY`",
           },
           {
             ["name"] = "title",
             ["req"] = true,
+            ["short"] = "The title of the poem",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "volume",
             ["req"] = true,
+            ["short"] = "The volume number of the Bleach manga",
             ["type"] = "`$INTEGER`",
           },
         },

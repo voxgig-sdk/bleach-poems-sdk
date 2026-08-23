@@ -263,9 +263,9 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `lines` |  |
-| `title` |  |
-| `volume` |  |
+| `lines` | The lines of the poem |
+| `title` | The title of the poem |
+| `volume` | The volume number of the Bleach manga |
 
 Operations: List, Load.
 
@@ -291,9 +291,9 @@ Create an instance: `$poem = $client->Poem();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `lines` | `array` |  |
-| `title` | `string` |  |
-| `volume` | `int` |  |
+| `lines` | `array` | The lines of the poem |
+| `title` | `string` | The title of the poem |
+| `volume` | `int` | The volume number of the Bleach manga |
 
 #### Example: Load
 

@@ -28,6 +28,9 @@ def make_config():
     return {
         "main": {
             "name": "BleachPoems",
+            "slug": "bleach-poems",
+            "version": "0.0.1",
+            "target": "py",
         },
         "feature": {
             "test": {
@@ -51,16 +54,19 @@ def make_config():
           {
             "name": "lines",
             "req": True,
+            "short": "The lines of the poem",
             "type": "`$ARRAY`",
           },
           {
             "name": "title",
             "req": True,
+            "short": "The title of the poem",
             "type": "`$STRING`",
           },
           {
             "name": "volume",
             "req": True,
+            "short": "The volume number of the Bleach manga",
             "type": "`$INTEGER`",
           },
         ],

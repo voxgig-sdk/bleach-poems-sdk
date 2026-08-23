@@ -36,18 +36,21 @@
               "active": true,
               "name": "lines",
               "req": true,
+              "short": "The lines of the poem",
               "type": "`$ARRAY`"
             },
             {
               "active": true,
               "name": "title",
               "req": true,
+              "short": "The title of the poem",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "volume",
               "req": true,
+              "short": "The volume number of the Bleach manga",
               "type": "`$INTEGER`"
             }
           ],

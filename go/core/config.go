@@ -11,6 +11,9 @@ func MakeConfig() map[string]any {
 	return map[string]any{
 		"main": map[string]any{
 			"name": "BleachPoems",
+			"slug": "bleach-poems",
+			"version": "0.0.1",
+			"target": "go",
 		},
 		"feature": map[string]any{
 			"test": map[string]any{
@@ -34,16 +37,19 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "lines",
 						"req": true,
+						"short": "The lines of the poem",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "title",
 						"req": true,
+						"short": "The title of the poem",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "volume",
 						"req": true,
+						"short": "The volume number of the Bleach manga",
 						"type": "`$INTEGER`",
 					},
 				},

@@ -116,9 +116,9 @@ const poem = client.Poem()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `lines` | `any[]` | Yes |  |
-| `title` | `string` | Yes |  |
-| `volume` | `number` | Yes |  |
+| `lines` | `any[]` | Yes | The lines of the poem |
+| `title` | `string` | Yes | The title of the poem |
+| `volume` | `number` | Yes | The volume number of the Bleach manga |
 
 ### Operations
 

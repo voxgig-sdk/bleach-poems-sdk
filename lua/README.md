@@ -241,9 +241,9 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `lines` |  |
-| `title` |  |
-| `volume` |  |
+| `lines` | The lines of the poem |
+| `title` | The title of the poem |
+| `volume` | The volume number of the Bleach manga |
 
 Operations: List, Load.
 
@@ -269,9 +269,9 @@ Create an instance: `local poem = client:Poem(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `lines` | `table` |  |
-| `title` | `string` |  |
-| `volume` | `number` |  |
+| `lines` | `table` | The lines of the poem |
+| `title` | `string` | The title of the poem |
+| `volume` | `number` | The volume number of the Bleach manga |
 
 #### Example: Load
 

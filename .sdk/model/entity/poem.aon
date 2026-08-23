@@ -8,16 +8,19 @@ main: kit: entity: poem: {
     {
       name: "lines"
       req: true
+      short: "The lines of the poem"
       type: "`$ARRAY`"
     }
     {
       name: "title"
       req: true
+      short: "The title of the poem"
       type: "`$STRING`"
     }
     {
       name: "volume"
       req: true
+      short: "The volume number of the Bleach manga"
       type: "`$INTEGER`"
     }
   ]

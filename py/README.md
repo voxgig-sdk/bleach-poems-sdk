@@ -256,9 +256,9 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `lines` |  |
-| `title` |  |
-| `volume` |  |
+| `lines` | The lines of the poem |
+| `title` | The title of the poem |
+| `volume` | The volume number of the Bleach manga |
 
 Operations: List, Load.
 
@@ -284,9 +284,9 @@ Create an instance: `poem = client.Poem()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `lines` | `list` |  |
-| `title` | `str` |  |
-| `volume` | `int` |  |
+| `lines` | `list` | The lines of the poem |
+| `title` | `str` | The title of the poem |
+| `volume` | `int` | The volume number of the Bleach manga |
 
 #### Example: Load
 

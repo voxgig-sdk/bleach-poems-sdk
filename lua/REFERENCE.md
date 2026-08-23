@@ -90,9 +90,9 @@ local poem = client:Poem(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `lines` | `table` | Yes |  |
-| `title` | `string` | Yes |  |
-| `volume` | `number` | Yes |  |
+| `lines` | `table` | Yes | The lines of the poem |
+| `title` | `string` | Yes | The title of the poem |
+| `volume` | `number` | Yes | The volume number of the Bleach manga |
 
 ### Operations
 

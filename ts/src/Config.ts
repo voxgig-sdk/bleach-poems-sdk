@@ -19,9 +19,20 @@ class Config {
     return fi
   }
 
+  // False for a feature added at runtime via options.extend (station's
+  // adopt path) - the constructor uses this to skip makeFeature for names
+  // no generated class backs.
+  hasFeature(this: any, fn: string) {
+    return null != FEATURE_CLASS[fn]
+  }
+
 
   main = {
     name: 'BleachPoems',
+        slug: "bleach-poems",
+    version: "0.0.1",
+    target: "ts",
+
   }
 
 
@@ -57,16 +68,19 @@ class Config {
         {
           "name": "lines",
           "req": true,
+          "short": "The lines of the poem",
           "type": "`$ARRAY`"
         },
         {
           "name": "title",
           "req": true,
+          "short": "The title of the poem",
           "type": "`$STRING`"
         },
         {
           "name": "volume",
           "req": true,
+          "short": "The volume number of the Bleach manga",
           "type": "`$INTEGER`"
         }
       ],
