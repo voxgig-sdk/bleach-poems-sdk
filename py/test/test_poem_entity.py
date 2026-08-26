@@ -88,9 +88,13 @@ class TestPoemEntity:
         assert isinstance(poem_ref01_list_result, list)
 
         # LOAD
-        poem_ref01_match_dt0 = {}
+        poem_ref01_match_dt0 = {
+            "id": poem_ref01_data["id"],
+        }
         poem_ref01_data_dt0_loaded = poem_ref01_ent.load(poem_ref01_match_dt0, None)
-        assert poem_ref01_data_dt0_loaded is not None
+        poem_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(poem_ref01_data_dt0_loaded))
+        assert poem_ref01_data_dt0_load_result is not None
+        assert poem_ref01_data_dt0_load_result["id"] == poem_ref01_data["id"]
 
 
 

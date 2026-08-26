@@ -66,6 +66,12 @@ describe('PoemEntity', async () => {
     const poem_ref01_list = (await poem_ref01_ent.list(poem_ref01_match)).map((e: any) => e.data())
 
 
+    // LOAD
+    const poem_ref01_match_dt0: any = {}
+    poem_ref01_match_dt0.id = poem_ref01_data.id
+    const poem_ref01_data_dt0 = (await poem_ref01_ent.load(poem_ref01_match_dt0)).data()
+    assert(poem_ref01_data_dt0.id === poem_ref01_data.id)
+
 
   })
 })

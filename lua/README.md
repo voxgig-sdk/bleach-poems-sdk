@@ -43,7 +43,7 @@ local poems, err = client:Poem():list()
 if err then error(err) end
 
 for _, item in ipairs(poems) do
-  print(item["title"])
+  print(item["id"], item["title"])
 end
 ```
 
@@ -241,6 +241,7 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
+| `id` |  |
 | `lines` | The lines of the poem |
 | `title` | The title of the poem |
 | `volume` | The volume number of the Bleach manga |
@@ -269,6 +270,7 @@ Create an instance: `local poem = client:Poem(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `id` | `string` |  |
 | `lines` | `table` | The lines of the poem |
 | `title` | `string` | The title of the poem |
 | `volume` | `number` | The volume number of the Bleach manga |

@@ -121,13 +121,19 @@ func TestPoemEntity(t *testing.T) {
 		}
 
 		// LOAD
-		poemRef01MatchDt0 := map[string]any{}
+		poemRef01MatchDt0 := map[string]any{
+			"id": poemRef01Data["id"],
+		}
 		poemRef01DataDt0Loaded, err := poemRef01Ent.Load(poemRef01MatchDt0, nil)
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		if poemRef01DataDt0Loaded == nil {
-			t.Fatal("expected load result to be non-nil")
+		poemRef01DataDt0LoadResult := core.ToMapAny(entityData(poemRef01DataDt0Loaded))
+		if poemRef01DataDt0LoadResult == nil {
+			t.Fatal("expected load result to be a map")
+		}
+		if poemRef01DataDt0LoadResult["id"] != poemRef01Data["id"] {
+			t.Fatal("expected load result id to match")
 		}
 
 	})

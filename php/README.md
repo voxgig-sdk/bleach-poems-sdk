@@ -38,7 +38,7 @@ try {
     // list() returns an array of Poem records — iterate directly.
     $poems = $client->Poem()->list();
     foreach ($poems as $item) {
-        echo $item["lines"] . "\n";
+        echo $item["id"] . " " . $item["lines"] . "\n";
     }
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
@@ -263,6 +263,7 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 | Field | Description |
 | --- | --- |
+| `id` |  |
 | `lines` | The lines of the poem |
 | `title` | The title of the poem |
 | `volume` | The volume number of the Bleach manga |
@@ -291,6 +292,7 @@ Create an instance: `$poem = $client->Poem();`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `id` | `string` |  |
 | `lines` | `array` | The lines of the poem |
 | `title` | `string` | The title of the poem |
 | `volume` | `int` | The volume number of the Bleach manga |

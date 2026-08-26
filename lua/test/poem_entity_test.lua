@@ -92,10 +92,14 @@ describe("PoemEntity", function()
     assert.is_table(poem_ref01_list_result)
 
     -- LOAD
-    local poem_ref01_match_dt0 = {}
+    local poem_ref01_match_dt0 = {
+      id = poem_ref01_data["id"],
+    }
     local poem_ref01_data_dt0_loaded, err = poem_ref01_ent:load(poem_ref01_match_dt0, nil)
     assert.is_nil(err)
-    assert.is_not_nil(poem_ref01_data_dt0_loaded)
+    local poem_ref01_data_dt0_load_result = helpers.to_map(type(poem_ref01_data_dt0_loaded) == 'table' and poem_ref01_data_dt0_loaded.data_get and poem_ref01_data_dt0_loaded:data_get() or poem_ref01_data_dt0_loaded)
+    assert.is_not_nil(poem_ref01_data_dt0_load_result)
+    assert.are.equal(poem_ref01_data_dt0_load_result["id"], poem_ref01_data["id"])
 
   end)
 end)

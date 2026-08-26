@@ -6,6 +6,7 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 
 export interface Poem {
+  id?: string
   lines: any[]
   title: string
   volume: number
@@ -16,6 +17,7 @@ export interface PoemLoadMatch {
 }
 
 export interface PoemListMatch {
+  id?: string
   lines?: any[]
   title?: string
   volume?: number

@@ -28,6 +28,7 @@ module BleachPoemsConfig
           "options" => {
             "active" => false,
           },
+          "transport" => "base",
         },
       },
       "options" => {
@@ -42,6 +43,10 @@ module BleachPoemsConfig
       "entity" => {
         "poem" => {
           "fields" => [
+            {
+              "name" => "id",
+              "type" => "`$STRING`",
+            },
             {
               "name" => "lines",
               "req" => true,

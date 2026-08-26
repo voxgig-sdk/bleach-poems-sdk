@@ -40,7 +40,8 @@ class Config {
      test:     {
       "options": {
         "active": false
-      }
+      },
+      "transport": "base"
     },
 
   }
@@ -65,6 +66,10 @@ class Config {
   entity = {
     "poem": {
       "fields": [
+        {
+          "name": "id",
+          "type": "`$STRING`"
+        },
         {
           "name": "lines",
           "req": true,

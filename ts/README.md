@@ -159,7 +159,7 @@ await entity.list()
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
-console.log(data)
+console.log(data.id)
 ```
 
 ### Add custom middleware
@@ -302,6 +302,7 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
+| `id` |  |
 | `lines` | The lines of the poem |
 | `title` | The title of the poem |
 | `volume` | The volume number of the Bleach manga |
@@ -330,6 +331,7 @@ Create an instance: `const poem = client.Poem()`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `id` | `string` |  |
 | `lines` | `any[]` | The lines of the poem |
 | `title` | `string` | The title of the poem |
 | `volume` | `number` | The volume number of the Bleach manga |

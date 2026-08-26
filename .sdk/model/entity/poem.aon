@@ -6,6 +6,11 @@ main: kit: entity: poem: {
 
   fields: [
     {
+      name: "id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
       name: "lines"
       req: true
       short: "The lines of the poem"
@@ -24,6 +29,11 @@ main: kit: entity: poem: {
       type: "`$INTEGER`"
     }
   ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
 
   name: "poem"
   op: {

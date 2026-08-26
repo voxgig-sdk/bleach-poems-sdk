@@ -269,6 +269,7 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
+| `"id"` |  |
 | `"lines"` | The lines of the poem |
 | `"title"` | The title of the poem |
 | `"volume"` | The volume number of the Bleach manga |
@@ -297,6 +298,7 @@ Create an instance: `poem := client.Poem(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `id` | `string` |  |
 | `lines` | `[]any` | The lines of the poem |
 | `title` | `string` | The title of the poem |
 | `volume` | `int` | The volume number of the Bleach manga |

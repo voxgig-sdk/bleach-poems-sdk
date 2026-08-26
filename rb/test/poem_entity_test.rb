@@ -83,9 +83,13 @@ class PoemEntityTest < Minitest::Test
     assert poem_ref01_list_result.is_a?(Array)
 
     # LOAD
-    poem_ref01_match_dt0 = {}
+    poem_ref01_match_dt0 = {
+      "id" => poem_ref01_data["id"],
+    }
     poem_ref01_data_dt0_loaded = poem_ref01_ent.load(poem_ref01_match_dt0, nil)
-    assert !poem_ref01_data_dt0_loaded.nil?
+    poem_ref01_data_dt0_load_result = Helpers.to_map(poem_ref01_data_dt0_loaded.respond_to?(:data_get) ? poem_ref01_data_dt0_loaded.data_get : poem_ref01_data_dt0_loaded)
+    assert !poem_ref01_data_dt0_load_result.nil?
+    assert_equal poem_ref01_data_dt0_load_result["id"], poem_ref01_data["id"]
 
   end
 end

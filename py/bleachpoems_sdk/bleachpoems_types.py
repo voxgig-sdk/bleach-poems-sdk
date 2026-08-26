@@ -16,10 +16,14 @@ from __future__ import annotations
 from typing import TypedDict, Any
 
 
-class Poem(TypedDict):
+class PoemRequired(TypedDict):
     lines: list
     title: str
     volume: int
+
+
+class Poem(PoemRequired, total=False):
+    id: str
 
 
 class PoemLoadMatch(TypedDict):
@@ -27,6 +31,7 @@ class PoemLoadMatch(TypedDict):
 
 
 class PoemListMatch(TypedDict, total=False):
+    id: str
     lines: list
     title: str
     volume: int

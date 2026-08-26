@@ -93,9 +93,13 @@ class PoemEntityTest extends TestCase
         $this->assertIsArray($poem_ref01_list_result);
 
         // LOAD
-        $poem_ref01_match_dt0 = [];
+        $poem_ref01_match_dt0 = [
+            "id" => $poem_ref01_data["id"],
+        ];
         $poem_ref01_data_dt0_loaded = $poem_ref01_ent->load($poem_ref01_match_dt0, null);
-        $this->assertNotNull($poem_ref01_data_dt0_loaded);
+        $poem_ref01_data_dt0_load_result = Helpers::to_map(is_object($poem_ref01_data_dt0_loaded) && method_exists($poem_ref01_data_dt0_loaded, 'data_get') ? $poem_ref01_data_dt0_loaded->data_get() : $poem_ref01_data_dt0_loaded);
+        $this->assertNotNull($poem_ref01_data_dt0_load_result);
+        $this->assertEquals($poem_ref01_data_dt0_load_result["id"], $poem_ref01_data["id"]);
 
     }
 }

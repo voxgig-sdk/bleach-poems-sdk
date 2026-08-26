@@ -93,6 +93,7 @@ poem = client.Poem
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `id` | `String` | No |  |
 | `lines` | `Array` | Yes | The lines of the poem |
 | `title` | `String` | Yes | The title of the poem |
 | `volume` | `Integer` | Yes | The volume number of the Bleach manga |

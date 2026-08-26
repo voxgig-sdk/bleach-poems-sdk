@@ -92,6 +92,7 @@ $poem = $client->Poem();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `id` | `string` | No |  |
 | `lines` | `array` | Yes | The lines of the poem |
 | `title` | `string` | Yes | The title of the poem |
 | `volume` | `int` | Yes | The volume number of the Bleach manga |

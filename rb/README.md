@@ -37,7 +37,7 @@ begin
   # list returns an Array of Poem records — iterate directly.
   poems = client.Poem.list
   poems.each do |item|
-    puts "#{item["lines"]}"
+    puts "#{item["id"]} #{item["lines"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -253,6 +253,7 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
+| `id` |  |
 | `lines` | The lines of the poem |
 | `title` | The title of the poem |
 | `volume` | The volume number of the Bleach manga |
@@ -281,6 +282,7 @@ Create an instance: `poem = client.Poem`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `id` | `String` |  |
 | `lines` | `Array` | The lines of the poem |
 | `title` | `String` | The title of the poem |
 | `volume` | `Integer` | The volume number of the Bleach manga |

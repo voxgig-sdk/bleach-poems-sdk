@@ -10,6 +10,9 @@
 
 # Poem entity data model.
 #
+# @!attribute [rw] id
+#   @return [String, nil]
+#
 # @!attribute [rw] lines
 #   @return [Array]
 #
@@ -19,6 +22,7 @@
 # @!attribute [rw] volume
 #   @return [Integer]
 Poem = Struct.new(
+  :id,
   :lines,
   :title,
   :volume,
@@ -36,6 +40,9 @@ PoemLoadMatch = Struct.new(
 
 # Request payload for Poem#list.
 #
+# @!attribute [rw] id
+#   @return [String, nil]
+#
 # @!attribute [rw] lines
 #   @return [Array, nil]
 #
@@ -45,6 +52,7 @@ PoemLoadMatch = Struct.new(
 # @!attribute [rw] volume
 #   @return [Integer, nil]
 PoemListMatch = Struct.new(
+  :id,
   :lines,
   :title,
   :volume,

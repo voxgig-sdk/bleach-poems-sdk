@@ -256,6 +256,7 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
+| `id` |  |
 | `lines` | The lines of the poem |
 | `title` | The title of the poem |
 | `volume` | The volume number of the Bleach manga |
@@ -284,6 +285,7 @@ Create an instance: `poem = client.Poem()`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `id` | `str` |  |
 | `lines` | `list` | The lines of the poem |
 | `title` | `str` | The title of the poem |
 | `volume` | `int` | The volume number of the Bleach manga |

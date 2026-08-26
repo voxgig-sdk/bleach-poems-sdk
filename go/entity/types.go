@@ -14,6 +14,7 @@ import (
 
 // Poem is the typed data model for the poem entity.
 type Poem struct {
+	Id *string `json:"id,omitempty"`
 	Lines []any `json:"lines"`
 	Title string `json:"title"`
 	Volume int `json:"volume"`
@@ -26,6 +27,7 @@ type PoemLoadMatch struct {
 
 // PoemListMatch is the typed request payload for Poem.ListTyped.
 type PoemListMatch struct {
+	Id *string `json:"id,omitempty"`
 	Lines *[]any `json:"lines,omitempty"`
 	Title *string `json:"title,omitempty"`
 	Volume *int `json:"volume,omitempty"`
