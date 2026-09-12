@@ -43,8 +43,10 @@ main: kit: entity: poem: {
         {
           method: "GET"
           orig: "/poems"
-          parts: [
-            "poems"
+          segments: [
+            {
+              lit: "poems"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -54,8 +56,10 @@ main: kit: entity: poem: {
         {
           method: "GET"
           orig: "/random"
-          parts: [
-            "random"
+          segments: [
+            {
+              lit: "random"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -82,15 +86,19 @@ main: kit: entity: poem: {
           }
           method: "GET"
           orig: "/poems/{volume}"
-          parts: [
-            "poems"
-            "{id}"
-          ]
           rename: {
             param: {
               volume: "id"
             }
           }
+          segments: [
+            {
+              lit: "poems"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"

@@ -54,6 +54,10 @@ local function make_config()
             ["type"] = "`$INTEGER`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "poem",
         ["op"] = {
           ["list"] = {
@@ -65,13 +69,18 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/poems",
-                ["parts"] = {
-                  "poems",
+                ["segments"] = {
+                  {
+                    ["lit"] = "poems",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.poems`",
+                },
+                ["parts"] = {
+                  "poems",
                 },
               },
               {
@@ -79,13 +88,18 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/random",
-                ["parts"] = {
-                  "random",
+                ["segments"] = {
+                  {
+                    ["lit"] = "random",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.lines`",
+                },
+                ["parts"] = {
+                  "random",
                 },
               },
             },
@@ -110,13 +124,17 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/poems/{volume}",
-                ["parts"] = {
-                  "poems",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["volume"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "poems",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -127,6 +145,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "poems",
+                  "{id}",
                 },
               },
             },

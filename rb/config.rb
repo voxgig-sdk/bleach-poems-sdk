@@ -66,6 +66,10 @@ module BleachPoemsConfig
               "type" => "`$INTEGER`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "poem",
           "op" => {
             "list" => {
@@ -77,28 +81,38 @@ module BleachPoemsConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/poems",
-                  "parts" => [
-                    "poems",
+                  "segments" => [
+                    {
+                      "lit" => "poems",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body.poems`",
                   },
+                  "parts" => [
+                    "poems",
+                  ],
                 },
                 {
                   "args" => {},
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/random",
-                  "parts" => [
-                    "random",
+                  "segments" => [
+                    {
+                      "lit" => "random",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body.lines`",
                   },
+                  "parts" => [
+                    "random",
+                  ],
                 },
               ],
             },
@@ -122,15 +136,19 @@ module BleachPoemsConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/poems/{volume}",
-                  "parts" => [
-                    "poems",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "volume" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "poems",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -140,6 +158,10 @@ module BleachPoemsConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "poems",
+                    "{id}",
+                  ],
                 },
               ],
             },
