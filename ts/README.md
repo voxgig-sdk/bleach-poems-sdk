@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { BleachPoemsSDK } from '@voxgig-sdk/bleach-poems'
+import { BleachPoemsSDK } from '@voxgig-sdk/bleach-poems-sdk'
 
 const client = new BleachPoemsSDK()
 ```
@@ -431,7 +431,7 @@ bleach-poems/
 Import the SDK from the package root:
 
 ```ts
-import { BleachPoemsSDK } from '@voxgig-sdk/bleach-poems'
+import { BleachPoemsSDK } from '@voxgig-sdk/bleach-poems-sdk'
 ```
 
 ### Entity state

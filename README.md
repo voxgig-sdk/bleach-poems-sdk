@@ -105,7 +105,7 @@ local results, err = client:Poem():list()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/bleach-poems` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bleach-poems-sdk/releases) |
+| TypeScript | `@voxgig-sdk/bleach-poems-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bleach-poems-sdk/releases) |
 | Python | `voxgig-sdk-bleach-poems` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bleach-poems-sdk/releases) |
 | PHP | `voxgig-sdk/bleach-poems` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bleach-poems-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/bleach-poems-sdk/go` | `go get github.com/voxgig-sdk/bleach-poems-sdk/go@latest` |
@@ -119,7 +119,7 @@ local results, err = client:Poem():list()
 ### TypeScript
 
 ```ts
-import { BleachPoemsSDK } from '@voxgig-sdk/bleach-poems'
+import { BleachPoemsSDK } from '@voxgig-sdk/bleach-poems-sdk'
 
 const client = new BleachPoemsSDK()
 
