@@ -5,6 +5,8 @@ import * as Fs from 'node:fs'
 
 import { test, describe, afterEach } from 'node:test'
 import assert from 'node:assert'
+import { createLiveTransport } from '../../live-runner'
+import { runLiveEntity } from '../../live-entity'
 
 
 import { BleachPoemsSDK, BaseFeature, stdutil } from '../../..'
@@ -47,16 +49,13 @@ describe('PoemEntity', async () => {
 
     const live = 'TRUE' === process.env.BLEACH_POEMS_TEST_LIVE
     for (const op of ['list', 'load']) {
-      if (maybeSkipControl(t, 'entityOp', 'poem.' + op, live)) return
+      if (!live && maybeSkipControl(t, 'entityOp', 'poem.' + op, live)) return
     }
 
+    
     const setup = basicSetup()
-    // The basic flow consumes synthetic IDs and field values from the
-    // fixture (entity TestData.json). Those don't exist on the live API.
-    // Skip live runs unless the user provided a real ENTID env override.
-    if (setup.syntheticOnly) {
-      t.skip('live entity test uses synthetic IDs from fixture — set BLEACH_POEMS_TEST_POEM_ENTID JSON to run live')
-      return
+    if (setup.live) {
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":[{"active":true,"name":"id","req":false,"type":"`$STRING`","index$":0},{"active":true,"name":"lines","req":true,"short":"The lines of the poem","type":"`$ARRAY`","index$":1},{"active":true,"name":"title","req":true,"short":"The title of the poem","type":"`$STRING`","index$":2},{"active":true,"name":"volume","req":true,"short":"The volume number of the Bleach manga","type":"`$INTEGER`","index$":3}],"id":{"field":"id","name":"id"},"name":"poem","op":{"list":{"input":"data","name":"list","points":[{"active":true,"args":{},"contract":{"id":"GET /poems","json":"{\"operationId\":\"getAllPoems\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":{\"poems\":[{\"lines\":[\"We fear that which we cannot see\"],\"title\":\"Death and Strawberry\",\"volume\":1}]},\"schema\":{\"properties\":{\"poems\":{\"description\":\"Array of all poems from Bleach volumes 1-74\",\"items\":{\"properties\":{\"lines\":{\"description\":\"The lines of the poem\",\"example\":[\"We fear that which we cannot see\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"title\":{\"description\":\"The title of the poem\",\"example\":\"Death and Strawberry\",\"type\":\"string\"},\"volume\":{\"description\":\"The volume number of the Bleach manga\",\"example\":1,\"maximum\":74,\"minimum\":1,\"type\":\"integer\"}},\"required\":[\"volume\",\"title\",\"lines\"],\"type\":\"object\"},\"type\":\"array\"}},\"required\":[\"poems\"],\"type\":\"object\"}}},\"description\":\"Successful response containing all poems\"}},\"securitySource\":\"unspecified\"}","source":"openapi3","version":1},"kind":"http","method":"GET","orig":"/poems","segments":[{"lit":"poems"}],"select":{},"transform":{"req":"`reqdata`","res":"`body.poems`"},"index$":0},{"active":true,"args":{},"contract":{"id":"GET /random","json":"{\"operationId\":\"getRandomPoem\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":{\"lines\":[\"If you want to know me\",\"look inside your heart\"],\"title\":\"Heart\",\"volume\":42},\"schema\":{\"properties\":{\"lines\":{\"description\":\"The lines of the poem\",\"example\":[\"We fear that which we cannot see\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"title\":{\"description\":\"The title of the poem\",\"example\":\"Death and Strawberry\",\"type\":\"string\"},\"volume\":{\"description\":\"The volume number of the Bleach manga\",\"example\":1,\"maximum\":74,\"minimum\":1,\"type\":\"integer\"}},\"required\":[\"volume\",\"title\",\"lines\"],\"type\":\"object\"}}},\"description\":\"Successful response containing a random poem\"}},\"securitySource\":\"unspecified\"}","source":"openapi3","version":1},"kind":"http","method":"GET","orig":"/random","segments":[{"lit":"random"}],"select":{},"transform":{"req":"`reqdata`","res":"`body.lines`"},"index$":1}],"key$":"list"},"load":{"input":"data","name":"load","points":[{"active":true,"args":{"params":[{"active":true,"example":1,"kind":"param","name":"id","orig":"volume","reqd":true,"type":"`$INTEGER`","index$":0}]},"contract":{"id":"GET /poems/{volume}","json":"{\"operationId\":\"getPoemByVolume\",\"parameters\":[{\"description\":\"Volume number (must be between 1 and 74)\",\"example\":1,\"in\":\"path\",\"name\":\"volume\",\"required\":true,\"schema\":{\"maximum\":74,\"minimum\":1,\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":{\"lines\":[\"We fear that which we cannot see\"],\"title\":\"Death and Strawberry\",\"volume\":1},\"schema\":{\"properties\":{\"lines\":{\"description\":\"The lines of the poem\",\"example\":[\"We fear that which we cannot see\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"title\":{\"description\":\"The title of the poem\",\"example\":\"Death and Strawberry\",\"type\":\"string\"},\"volume\":{\"description\":\"The volume number of the Bleach manga\",\"example\":1,\"maximum\":74,\"minimum\":1,\"type\":\"integer\"}},\"required\":[\"volume\",\"title\",\"lines\"],\"type\":\"object\"}}},\"description\":\"Successful response containing the poem for the specified volume\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Invalid volume number (not a number or out of range)\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Poem not found for the specified volume\"}},\"securitySource\":\"unspecified\"}","source":"openapi3","version":1},"kind":"http","method":"GET","orig":"/poems/{volume}","rename":{"param":{"volume":"id"}},"segments":[{"lit":"poems"},{"var":"id"}],"select":{"exist":["id"]},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"poem","name__orig":"poem","Name":"Poem","name_":"poem","name-":"poem","NAME":"POEM","index$":0}, {"active":true,"entity":"poem","key$":"BasicPoemFlow","kind":"basic","name":"BasicPoemFlow","param":{},"step":[{"active":true,"data":{},"input":{},"match":{},"op":"list","spec":[],"valid":[{"apply":"ItemExists","def":{"ref":"poem_ref01"}}],"index$":0},{"active":true,"data":{},"input":{"ref":"poem_ref01","srcdatavar":"poem_ref01_data","suffix":"_dt0"},"match":{"id":"poem01"},"op":"load","spec":[],"valid":[{"apply":"TextFieldMark","def":{"mark":"Mark01-poem_ref01"}}],"index$":1}]}, 'Poem')
     }
     const client = setup.client
     const struct = setup.struct
@@ -116,13 +115,6 @@ function basicSetup(extra?: any) {
       }]
     })
 
-  // Detect whether the user provided a real ENTID JSON via env var. The
-  // basic flow consumes synthetic IDs from the fixture file; without an
-  // override those synthetic IDs reach the live API and 4xx. Surface this
-  // to the test so it can skip rather than fail.
-  const idmapEnvVal = process.env['BLEACH_POEMS_TEST_POEM_ENTID']
-  const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{')
-
   const env = envOverride({
     'BLEACH_POEMS_TEST_POEM_ENTID': idmap,
     'BLEACH_POEMS_TEST_LIVE': 'FALSE',
@@ -133,7 +125,13 @@ function basicSetup(extra?: any) {
 
   const live = 'TRUE' === env.BLEACH_POEMS_TEST_LIVE
 
+  const transport = createLiveTransport()
   if (live) {
+    const rawIds = process.env['BLEACH_POEMS_TEST_POEM_ENTID']
+    idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {}
+    if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+      throw new Error('Live ENTID must be a JSON object')
+    }
     client = new BleachPoemsSDK(merge([
       // FIRST, so the generated fields below win: sdk-test-control.json's
       // test.client.options adds to the live client, it does not redirect it.
@@ -145,7 +143,8 @@ function basicSetup(extra?: any) {
       // argument at all - so a bare 'extra' silently discarded the apikey
       // and server values above and handed the SDK undefined. Harmless
       // while there was nothing in that object; not harmless now.
-      extra || {}
+      extra || {},
+      { system: { fetch: transport.fetch } }
     ]))
   }
 
@@ -158,7 +157,7 @@ function basicSetup(extra?: any) {
     data: entityData,
     explain: 'TRUE' === env.BLEACH_POEMS_TEST_EXPLAIN,
     live,
-    syntheticOnly: live && !idmapOverridden,
+    transport,
     now: Date.now(),
   }
 

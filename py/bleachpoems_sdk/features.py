@@ -1,12 +1,18 @@
 # BleachPoems SDK feature factory
 
 from bleachpoems_sdk.feature.base_feature import BleachPoemsBaseFeature
+from bleachpoems_sdk.feature.ratelimit_feature import BleachPoemsRatelimitFeature
+from bleachpoems_sdk.feature.retry_feature import BleachPoemsRetryFeature
 from bleachpoems_sdk.feature.test_feature import BleachPoemsTestFeature
+from bleachpoems_sdk.feature.timeout_feature import BleachPoemsTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: BleachPoemsBaseFeature(),
+    "ratelimit": lambda: BleachPoemsRatelimitFeature(),
+    "retry": lambda: BleachPoemsRetryFeature(),
     "test": lambda: BleachPoemsTestFeature(),
+    "timeout": lambda: BleachPoemsTimeoutFeature(),
 }
 
 
