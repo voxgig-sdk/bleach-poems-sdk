@@ -116,25 +116,29 @@ def make_config():
         "fields": [
           {
             "name": "id",
+            "title": "Id",
             "type": "`$STRING`",
           },
           {
             "name": "lines",
+            "title": "Lines",
+            "type": "`$ARRAY`",
             "req": True,
             "short": "The lines of the poem",
-            "type": "`$ARRAY`",
           },
           {
             "name": "title",
+            "title": "Title",
+            "type": "`$STRING`",
             "req": True,
             "short": "The title of the poem",
-            "type": "`$STRING`",
           },
           {
             "name": "volume",
+            "title": "Volume",
+            "type": "`$INTEGER`",
             "req": True,
             "short": "The volume number of the Bleach manga",
-            "type": "`$INTEGER`",
           },
         ],
         "id": {
@@ -148,7 +152,6 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "args": {},
                 "kind": "http",
                 "method": "GET",
                 "orig": "/poems",
@@ -157,17 +160,18 @@ def make_config():
                     "lit": "poems",
                   },
                 ],
-                "select": {},
+                "parts": [
+                  "poems",
+                ],
+                "rename": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body.poems`",
                 },
-                "parts": [
-                  "poems",
-                ],
+                "args": {},
+                "select": {},
               },
               {
-                "args": {},
                 "kind": "http",
                 "method": "GET",
                 "orig": "/random",
@@ -176,14 +180,16 @@ def make_config():
                     "lit": "random",
                   },
                 ],
-                "select": {},
+                "parts": [
+                  "random",
+                ],
+                "rename": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body.lines`",
                 },
-                "parts": [
-                  "random",
-                ],
+                "args": {},
+                "select": {},
               },
             ],
           },
@@ -192,26 +198,9 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "params": [
-                    {
-                      "example": 1,
-                      "kind": "param",
-                      "name": "id",
-                      "orig": "volume",
-                      "reqd": True,
-                      "type": "`$INTEGER`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/poems/{volume}",
-                "rename": {
-                  "param": {
-                    "volume": "id",
-                  },
-                },
                 "segments": [
                   {
                     "lit": "poems",
@@ -220,19 +209,36 @@ def make_config():
                     "var": "id",
                   },
                 ],
-                "select": {
-                  "exist": [
-                    "id",
-                  ],
+                "parts": [
+                  "poems",
+                  "{id}",
+                ],
+                "rename": {
+                  "param": {
+                    "volume": "id",
+                  },
                 },
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "parts": [
-                  "poems",
-                  "{id}",
-                ],
+                "args": {
+                  "params": [
+                    {
+                      "name": "id",
+                      "orig": "volume",
+                      "type": "`$INTEGER`",
+                      "kind": "param",
+                      "reqd": True,
+                      "example": 1,
+                    },
+                  ],
+                },
+                "select": {
+                  "exist": [
+                    "id",
+                  ],
+                },
               },
             ],
           },

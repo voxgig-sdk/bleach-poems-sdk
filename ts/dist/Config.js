@@ -11,19 +11,12 @@ const FEATURE_CLASS = {
     test: TestFeature_1.TestFeature,
     timeout: TimeoutFeature_1.TimeoutFeature,
 };
-// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
-// the model's active plugin groups. A feature that takes a `plugins` option
-// (secrets over sekreto) reads its own entry; a feature with no plugins has
-// none. Named imports above make each definition statically reachable, so
-// an SDK carries exactly the plugin modules its model selects — the same
-// leanness the old side-effect registry imports bought, without a registry.
 const FEATURE_PLUGINS = {};
 exports.FEATURE_PLUGINS = FEATURE_PLUGINS;
 class Config {
     makeFeature(fn) {
         const fc = FEATURE_CLASS[fn];
         const fi = new fc();
-        // TODO: errors etc
         return fi;
     }
     // False for a feature added at runtime via options.extend (station's
@@ -114,25 +107,29 @@ class Config {
             "fields": [
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "lines",
+                    "title": "Lines",
+                    "type": "`$ARRAY`",
                     "req": true,
-                    "short": "The lines of the poem",
-                    "type": "`$ARRAY`"
+                    "short": "The lines of the poem"
                 },
                 {
                     "name": "title",
+                    "title": "Title",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "The title of the poem",
-                    "type": "`$STRING`"
+                    "short": "The title of the poem"
                 },
                 {
                     "name": "volume",
+                    "title": "Volume",
+                    "type": "`$INTEGER`",
                     "req": true,
-                    "short": "The volume number of the Bleach manga",
-                    "type": "`$INTEGER`"
+                    "short": "The volume number of the Bleach manga"
                 }
             ],
             "id": {
@@ -146,7 +143,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/poems",
@@ -155,17 +151,18 @@ class Config {
                                     "lit": "poems"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "poems"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.poems`"
                             },
-                            "parts": [
-                                "poems"
-                            ]
+                            "args": {},
+                            "select": {}
                         },
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/random",
@@ -174,14 +171,16 @@ class Config {
                                     "lit": "random"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "random"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.lines`"
                             },
-                            "parts": [
-                                "random"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 },
@@ -190,26 +189,9 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "example": 1,
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "volume",
-                                        "reqd": true,
-                                        "type": "`$INTEGER`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/poems/{volume}",
-                            "rename": {
-                                "param": {
-                                    "volume": "id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "poems"
@@ -218,19 +200,36 @@ class Config {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "id"
-                                ]
+                            "parts": [
+                                "poems",
+                                "{id}"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "volume": "id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "poems",
-                                "{id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "volume",
+                                        "type": "`$INTEGER`",
+                                        "kind": "param",
+                                        "reqd": true,
+                                        "example": 1
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 }

@@ -91,25 +91,29 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "id",
+						"title": "Id",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "lines",
+						"title": "Lines",
+						"type": "`$ARRAY`",
 						"req": true,
 						"short": "The lines of the poem",
-						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "title",
+						"title": "Title",
+						"type": "`$STRING`",
 						"req": true,
 						"short": "The title of the poem",
-						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "volume",
+						"title": "Volume",
+						"type": "`$INTEGER`",
 						"req": true,
 						"short": "The volume number of the Bleach manga",
-						"type": "`$INTEGER`",
 					},
 				},
 				"id": map[string]any{
@@ -123,7 +127,6 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/poems",
@@ -132,17 +135,18 @@ func MakeConfig() map[string]any {
 										"lit": "poems",
 									},
 								},
-								"select": map[string]any{},
+								"parts": []any{
+									"poems",
+								},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.poems`",
 								},
-								"parts": []any{
-									"poems",
-								},
+								"args": map[string]any{},
+								"select": map[string]any{},
 							},
 							map[string]any{
-								"args": map[string]any{},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/random",
@@ -151,14 +155,16 @@ func MakeConfig() map[string]any {
 										"lit": "random",
 									},
 								},
-								"select": map[string]any{},
+								"parts": []any{
+									"random",
+								},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.lines`",
 								},
-								"parts": []any{
-									"random",
-								},
+								"args": map[string]any{},
+								"select": map[string]any{},
 							},
 						},
 					},
@@ -167,26 +173,9 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"example": 1,
-											"kind": "param",
-											"name": "id",
-											"orig": "volume",
-											"reqd": true,
-											"type": "`$INTEGER`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/poems/{volume}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"volume": "id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "poems",
@@ -195,18 +184,35 @@ func MakeConfig() map[string]any {
 										"var": "id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"id",
+								"parts": []any{
+									"poems",
+									"{id}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"volume": "id",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"poems",
-									"{id}",
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "id",
+											"orig": "volume",
+											"type": "`$INTEGER`",
+											"kind": "param",
+											"reqd": true,
+											"example": 1,
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"id",
+									},
 								},
 							},
 						},

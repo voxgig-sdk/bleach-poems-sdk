@@ -1,0 +1,137 @@
+# Entity: poem
+
+main: kit: entity: poem: {
+
+  alias: field: {}
+
+  fields: {
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    lines: {
+      h: "Lines"
+      n: "lines"
+      r: true
+      sh: "The lines of the poem"
+      t: "`$ARRAY`"
+    }
+    title: {
+      h: "Title"
+      n: "title"
+      r: true
+      sh: "The title of the poem"
+      t: "`$STRING`"
+    }
+    volume: {
+      h: "Volume"
+      n: "volume"
+      r: true
+      sh: "The volume number of the Bleach manga"
+      t: "`$INTEGER`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "poem"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /poems"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/poems"
+          s: [
+            {
+              lit: "poems"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.poems`"
+          }
+        }
+        {
+          co: {
+            id: "GET /random"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/random"
+          s: [
+            {
+              lit: "random"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.lines`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /poems/{volume}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: 1
+                k: "param"
+                n: "id"
+                or: "volume"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/poems/{volume}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              volume: "id"
+            }
+          }
+          s: [
+            {
+              lit: "poems"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

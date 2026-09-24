@@ -1,7 +1,7 @@
 // Typed models for the BleachPoems SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -14,10 +14,6 @@ import (
 
 // Poem is the typed data model for the poem entity.
 type Poem struct {
-	Id *string `json:"id,omitempty"`
-	Lines []any `json:"lines"`
-	Title string `json:"title"`
-	Volume int `json:"volume"`
 }
 
 // PoemLoadMatch is the typed request payload for Poem.LoadTyped.

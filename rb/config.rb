@@ -99,25 +99,29 @@ module BleachPoemsConfig
           "fields" => [
             {
               "name" => "id",
+              "title" => "Id",
               "type" => "`$STRING`",
             },
             {
               "name" => "lines",
+              "title" => "Lines",
+              "type" => "`$ARRAY`",
               "req" => true,
               "short" => "The lines of the poem",
-              "type" => "`$ARRAY`",
             },
             {
               "name" => "title",
+              "title" => "Title",
+              "type" => "`$STRING`",
               "req" => true,
               "short" => "The title of the poem",
-              "type" => "`$STRING`",
             },
             {
               "name" => "volume",
+              "title" => "Volume",
+              "type" => "`$INTEGER`",
               "req" => true,
               "short" => "The volume number of the Bleach manga",
-              "type" => "`$INTEGER`",
             },
           ],
           "id" => {
@@ -131,7 +135,6 @@ module BleachPoemsConfig
               "name" => "list",
               "points" => [
                 {
-                  "args" => {},
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/poems",
@@ -140,17 +143,18 @@ module BleachPoemsConfig
                       "lit" => "poems",
                     },
                   ],
-                  "select" => {},
+                  "parts" => [
+                    "poems",
+                  ],
+                  "rename" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body.poems`",
                   },
-                  "parts" => [
-                    "poems",
-                  ],
+                  "args" => {},
+                  "select" => {},
                 },
                 {
-                  "args" => {},
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/random",
@@ -159,14 +163,16 @@ module BleachPoemsConfig
                       "lit" => "random",
                     },
                   ],
-                  "select" => {},
+                  "parts" => [
+                    "random",
+                  ],
+                  "rename" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body.lines`",
                   },
-                  "parts" => [
-                    "random",
-                  ],
+                  "args" => {},
+                  "select" => {},
                 },
               ],
             },
@@ -175,26 +181,9 @@ module BleachPoemsConfig
               "name" => "load",
               "points" => [
                 {
-                  "args" => {
-                    "params" => [
-                      {
-                        "example" => 1,
-                        "kind" => "param",
-                        "name" => "id",
-                        "orig" => "volume",
-                        "reqd" => true,
-                        "type" => "`$INTEGER`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/poems/{volume}",
-                  "rename" => {
-                    "param" => {
-                      "volume" => "id",
-                    },
-                  },
                   "segments" => [
                     {
                       "lit" => "poems",
@@ -203,19 +192,36 @@ module BleachPoemsConfig
                       "var" => "id",
                     },
                   ],
-                  "select" => {
-                    "exist" => [
-                      "id",
-                    ],
+                  "parts" => [
+                    "poems",
+                    "{id}",
+                  ],
+                  "rename" => {
+                    "param" => {
+                      "volume" => "id",
+                    },
                   },
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "parts" => [
-                    "poems",
-                    "{id}",
-                  ],
+                  "args" => {
+                    "params" => [
+                      {
+                        "name" => "id",
+                        "orig" => "volume",
+                        "type" => "`$INTEGER`",
+                        "kind" => "param",
+                        "reqd" => true,
+                        "example" => 1,
+                      },
+                    ],
+                  },
+                  "select" => {
+                    "exist" => [
+                      "id",
+                    ],
+                  },
                 },
               ],
             },

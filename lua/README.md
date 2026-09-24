@@ -43,7 +43,7 @@ local poems, err = client:Poem():list()
 if err then error(err) end
 
 for _, item in ipairs(poems) do
-  print(item["id"], item["title"])
+  print(item["id"])
 end
 ```
 

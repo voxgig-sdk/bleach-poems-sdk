@@ -24,41 +24,111 @@
         "repr": "auto"
       },
       "contributor": {},
+      "doc": {
+        "active": true,
+        "assets": {
+          "path": ".sdk/doc/assets"
+        },
+        "brand": {
+          "label": "",
+          "notice": "",
+          "shortNotice": "",
+          "url": ""
+        },
+        "ci": {
+          "active": true,
+          "branch": "main"
+        },
+        "content": {
+          "path": ".sdk/doc/content"
+        },
+        "edition": {
+          "summary": {
+            "active": true,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "summary",
+            "name": "summary",
+            "origname": "",
+            "output": {
+              "path": "SUMMARY.md"
+            },
+            "package": "@voxgig/docgen",
+            "published": false,
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          }
+        },
+        "qa": {
+          "vocabulary": []
+        },
+        "style": {
+          "color": {
+            "accent": "#00c6d8",
+            "background": "#f5f5f9",
+            "darkBackground": "#0f1117",
+            "darkText": "#e6edf3",
+            "primary": "#e70042",
+            "text": "#0a0a0a"
+          },
+          "font": "Nunito, system-ui, sans-serif",
+          "fontFile": "",
+          "headingFont": "Nunito, system-ui, sans-serif",
+          "headingFontFile": "",
+          "logo": "",
+          "mode": "light",
+          "mono": "ui-monospace, monospace",
+          "monoFile": ""
+        },
+        "target": {}
+      },
       "entity": {
         "poem": {
           "active": true,
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "id",
-              "req": false,
-              "type": "`$STRING`"
+          "fields": {
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "lines",
-              "req": true,
-              "short": "The lines of the poem",
-              "type": "`$ARRAY`"
+            "lines": {
+              "a": true,
+              "h": "Lines",
+              "n": "lines",
+              "r": true,
+              "sh": "The lines of the poem",
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "title",
-              "req": true,
-              "short": "The title of the poem",
-              "type": "`$STRING`"
+            "title": {
+              "a": true,
+              "h": "Title",
+              "n": "title",
+              "r": true,
+              "sh": "The title of the poem",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "volume",
-              "req": true,
-              "short": "The volume number of the Bleach manga",
-              "type": "`$INTEGER`"
+            "volume": {
+              "a": true,
+              "h": "Volume",
+              "n": "volume",
+              "r": true,
+              "sh": "The volume number of the Bleach manga",
+              "t": "`$INTEGER`"
             }
-          ],
+          },
           "id": {
             "field": "id",
             "name": "id"
@@ -70,47 +140,47 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "GET /poems",
-                    "json": "{\"operationId\":\"getAllPoems\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":{\"poems\":[{\"lines\":[\"We fear that which we cannot see\"],\"title\":\"Death and Strawberry\",\"volume\":1}]},\"schema\":{\"properties\":{\"poems\":{\"description\":\"Array of all poems from Bleach volumes 1-74\",\"items\":{\"properties\":{\"lines\":{\"description\":\"The lines of the poem\",\"example\":[\"We fear that which we cannot see\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"title\":{\"description\":\"The title of the poem\",\"example\":\"Death and Strawberry\",\"type\":\"string\"},\"volume\":{\"description\":\"The volume number of the Bleach manga\",\"example\":1,\"maximum\":74,\"minimum\":1,\"type\":\"integer\"}},\"required\":[\"volume\",\"title\",\"lines\"],\"type\":\"object\"},\"type\":\"array\"}},\"required\":[\"poems\"],\"type\":\"object\"}}},\"description\":\"Successful response containing all poems\"}},\"securitySource\":\"unspecified\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/poems",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/poems",
+                  "q": {},
+                  "r": {},
+                  "s": [
                     {
                       "lit": "poems"
                     }
                   ],
-                  "select": {},
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.poems`"
                   }
                 },
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "GET /random",
-                    "json": "{\"operationId\":\"getRandomPoem\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":{\"lines\":[\"If you want to know me\",\"look inside your heart\"],\"title\":\"Heart\",\"volume\":42},\"schema\":{\"properties\":{\"lines\":{\"description\":\"The lines of the poem\",\"example\":[\"We fear that which we cannot see\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"title\":{\"description\":\"The title of the poem\",\"example\":\"Death and Strawberry\",\"type\":\"string\"},\"volume\":{\"description\":\"The volume number of the Bleach manga\",\"example\":1,\"maximum\":74,\"minimum\":1,\"type\":\"integer\"}},\"required\":[\"volume\",\"title\",\"lines\"],\"type\":\"object\"}}},\"description\":\"Successful response containing a random poem\"}},\"securitySource\":\"unspecified\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/random",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/random",
+                  "q": {},
+                  "r": {},
+                  "s": [
                     {
                       "lit": "random"
                     }
                   ],
-                  "select": {},
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.lines`"
                   }
@@ -122,35 +192,39 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /poems/{volume}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "params": [
                       {
-                        "active": true,
-                        "example": 1,
-                        "kind": "param",
-                        "name": "id",
-                        "orig": "volume",
-                        "reqd": true,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "ex": 1,
+                        "k": "param",
+                        "n": "id",
+                        "or": "volume",
+                        "r": true,
+                        "t": "`$INTEGER`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /poems/{volume}",
-                    "json": "{\"operationId\":\"getPoemByVolume\",\"parameters\":[{\"description\":\"Volume number (must be between 1 and 74)\",\"example\":1,\"in\":\"path\",\"name\":\"volume\",\"required\":true,\"schema\":{\"maximum\":74,\"minimum\":1,\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":{\"lines\":[\"We fear that which we cannot see\"],\"title\":\"Death and Strawberry\",\"volume\":1},\"schema\":{\"properties\":{\"lines\":{\"description\":\"The lines of the poem\",\"example\":[\"We fear that which we cannot see\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"title\":{\"description\":\"The title of the poem\",\"example\":\"Death and Strawberry\",\"type\":\"string\"},\"volume\":{\"description\":\"The volume number of the Bleach manga\",\"example\":1,\"maximum\":74,\"minimum\":1,\"type\":\"integer\"}},\"required\":[\"volume\",\"title\",\"lines\"],\"type\":\"object\"}}},\"description\":\"Successful response containing the poem for the specified volume\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Invalid volume number (not a number or out of range)\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Poem not found for the specified volume\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/poems/{volume}",
+                  "q": {
+                    "exist": [
+                      "id"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/poems/{volume}",
-                  "rename": {
+                  "r": {
                     "param": {
                       "volume": "id"
                     }
                   },
-                  "segments": [
+                  "s": [
                     {
                       "lit": "poems"
                     },
@@ -158,12 +232,7 @@
                       "var": "id"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "id"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -592,13 +661,13 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
@@ -608,19 +677,19 @@
               ]
             },
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "poem_ref01",
                 "srcdatavar": "poem_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {
+              "m": {
                 "id": "poem01"
               },
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
