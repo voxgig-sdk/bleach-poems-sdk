@@ -33,6 +33,8 @@ require_relative 'transform_response'
 
 BleachPoemsUtility.registrar = ->(u) {
   u.clean = BleachPoemsUtilities::Clean
+  u.clean_add = BleachPoemsUtilities::CleanAdd
+  u.clean_explain = BleachPoemsUtilities::CleanExplain
   u.done = BleachPoemsUtilities::Done
   u.make_error = BleachPoemsUtilities::MakeError
   u.feature_add = BleachPoemsUtilities::FeatureAdd

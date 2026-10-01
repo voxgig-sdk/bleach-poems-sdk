@@ -37,6 +37,8 @@ require_once __DIR__ . '/TransformResponse.php';
 
 BleachPoemsUtility::setRegistrar(function (BleachPoemsUtility $u): void {
     $u->clean = [BleachPoemsClean::class, 'call'];
+    $u->clean_add = [BleachPoemsClean::class, 'add'];
+    $u->clean_explain = [BleachPoemsDone::class, 'clean_explain'];
     $u->done = [BleachPoemsDone::class, 'call'];
     $u->make_error = [BleachPoemsMakeError::class, 'call'];
     $u->feature_add = [BleachPoemsFeatureAdd::class, 'call'];
