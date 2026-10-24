@@ -3,5 +3,18 @@
     "SUMMARY.md"
   ],
   "config": ".sdk/doc/qa/vale.ini",
-  "routes": {}
+  "routes": {},
+  "quoted": {
+    "SUMMARY.md": [
+      "Local development server",
+      "Public instance",
+      "Successful response containing a random poem",
+      "Successful response containing all poems",
+      "Successful response containing the poem for the specified volume",
+      "The lines of the poem",
+      "The title of the poem",
+      "The volume number of the Bleach manga",
+      "This API provides a JSON representation of all poems from the Bleach series, encompassing volumes 1 to 74. Additionally, it features a simple web server that allows users to access poems by volume or retrieve a random poem."
+    ]
+  }
 }

@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { BleachPoemsSDK, BaseFeature, stdutil } from '../../..'
+import { BleachPoemsSDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,64 @@ describe('PoemEntity', async () => {
   })
 
 
+  class FailHook extends BaseFeature {
+    name = 'failhook'
+    version = '0.0.1'
+    active = true
+    unexpected = 0
+    init() { }
+    PreSpec() { throw new Error('poem hook failed') }
+    PreUnexpected() { this.unexpected++ }
+  }
+
+  test('stream-error', async () => {
+    const offline = { net: { offline: true } }
+    await assert.rejects(async () => {
+      for await (const _item of BleachPoemsSDK.test(offline).Poem().stream('list')) { }
+    }, /offline/)
+
+    for await (const _item of BleachPoemsSDK.test(offline).Poem()
+      .stream('list', undefined, { ctrl: { throw: false } })) { }
+
+    if (null != (config as any).feature?.rbac) {
+      const denied = BleachPoemsSDK.test(undefined, { feature: { rbac: { active: true, deny: true } } })
+      await assert.rejects(async () => {
+        for await (const _item of denied.Poem().stream('list')) { }
+      }, (err: any) => 'rbac_denied' === err.code)
+    }
+  })
+
+  test('stream-ctrl', async () => {
+    const explain: any = {}
+    const ctrl: any = { explain }
+    for await (const _item of BleachPoemsSDK.test().Poem().stream('list', undefined, { ctrl })) { }
+    assert.deepStrictEqual(Object.keys(ctrl), ['explain'])
+    assert(explain === ctrl.explain && 0 < Object.keys(explain).length)
+  })
+
+  test('unexpected', async () => {
+    const hook = new FailHook()
+    const client = new BleachPoemsSDK({ feature: { test: { active: true } }, extend: [hook] })
+    await assert.rejects(client.Poem().list(), /hook failed/)
+    assert(0 < hook.unexpected)
+
+    const fired = hook.unexpected
+    assert.strictEqual(await client.Poem().list(undefined, { throw: false }), undefined)
+    assert(fired < hook.unexpected)
+  })
+
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = BleachPoemsSDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.Poem().list({"id":1} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.BLEACH_POEMS_TEST_LIVE
@@ -51,7 +109,7 @@ describe('PoemEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"id":{"a":true,"h":"Id","n":"id","r":false,"t":"`$STRING`","key$":"id","index$":0},"lines":{"a":true,"h":"Lines","n":"lines","r":true,"sh":"The lines of the poem","t":"`$ARRAY`","key$":"lines","index$":1},"title":{"a":true,"h":"Title","n":"title","r":true,"sh":"The title of the poem","t":"`$STRING`","key$":"title","index$":2},"volume":{"a":true,"h":"Volume","n":"volume","r":true,"sh":"The volume number of the Bleach manga","t":"`$INTEGER`","key$":"volume","index$":3}},"id":{"field":"id","name":"id"},"name":"poem","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /poems","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/poems","q":{},"r":{},"s":[{"lit":"poems"}],"t":{"req":"`reqdata`","res":"`body.poems`"},"index$":0},{"a":true,"co":{"id":"GET /random","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/random","q":{},"r":{},"s":[{"lit":"random"}],"t":{"req":"`reqdata`","res":"`body.lines`"},"index$":1}],"key$":"list"},"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /poems/{volume}","source":"openapi3","version":2},"g":{"params":[{"a":true,"ex":1,"k":"param","n":"id","or":"volume","r":true,"t":"`$INTEGER`","index$":0}]},"k":"http","m":"GET","o":"/poems/{volume}","q":{"exist":["id"]},"r":{"param":{"volume":"id"}},"s":[{"lit":"poems"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"poem","name__orig":"poem","Name":"Poem","name_":"poem","name-":"poem","NAME":"POEM","index$":0}, {"active":true,"entity":"poem","key$":"BasicPoemFlow","kind":"basic","name":"BasicPoemFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"poem_ref01"}}],"index$":0},{"a":true,"d":{},"i":{"ref":"poem_ref01","srcdatavar":"poem_ref01_data","suffix":"_dt0"},"m":{"id":"poem01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-poem_ref01"}}],"index$":1}]}, 'Poem', {"GET /poems":{"protocol":"http","parameters":[]},"GET /random":{"protocol":"http","parameters":[]},"GET /poems/{volume}":{"protocol":"http","parameters":[{"name":"volume","in":"path","description":"Volume number (must be between 1 and 74)","required":true,"schema":{"type":"integer","minimum":1,"maximum":74},"example":1,"index$":0}]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"id":{"a":true,"h":"Id","n":"id","r":false,"t":"`$STRING`","key$":"id","index$":0},"lines":{"a":true,"h":"Lines","n":"lines","r":true,"sh":"The lines of the poem","t":"`$ARRAY`","key$":"lines","index$":1},"title":{"a":true,"h":"Title","n":"title","r":true,"sh":"The title of the poem","t":"`$STRING`","key$":"title","index$":2},"volume":{"a":true,"h":"Volume","n":"volume","r":true,"sh":"The volume number of the Bleach manga","t":"`$INTEGER`","key$":"volume","index$":3}},"id":{"field":"id","name":"id"},"name":"poem","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /poems","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/poems","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"poems"}],"t":{"req":"`reqdata`","res":"`body.poems`"},"index$":0},{"a":true,"co":{"id":"GET /random","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/random","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"random"}],"t":{"req":"`reqdata`","res":"`body.lines`"},"index$":1}],"key$":"list"},"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /poems/{volume}","source":"openapi3","version":2},"g":{"params":[{"a":true,"ex":1,"k":"param","n":"id","or":"volume","r":true,"t":"`$INTEGER`","index$":0}]},"k":"http","m":"GET","o":"/poems/{volume}","q":{"exist":["id"]},"r":{"param":{"volume":"id"}},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"poems"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"poem","name__orig":"poem","Name":"Poem","name_":"poem","name-":"poem","NAME":"POEM","index$":0}, {"active":true,"entity":"poem","key$":"BasicPoemFlow","kind":"basic","name":"BasicPoemFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"poem_ref01"}}],"index$":0},{"a":true,"d":{},"i":{"ref":"poem_ref01","srcdatavar":"poem_ref01_data","suffix":"_dt0"},"m":{"id":"poem01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-poem_ref01"}}],"index$":1}]}, 'Poem', {"GET /poems":{"protocol":"http","parameters":[]},"GET /random":{"protocol":"http","parameters":[]},"GET /poems/{volume}":{"protocol":"http","parameters":[{"name":"volume","in":"path","description":"Volume number (must be between 1 and 74)","required":true,"schema":{"type":"integer","minimum":1,"maximum":74},"example":1,"index$":0}]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -79,6 +137,12 @@ describe('PoemEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

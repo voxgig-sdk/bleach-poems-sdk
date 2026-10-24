@@ -1,0 +1,11 @@
+{
+  point: "warning"
+  note: "Points GET /poems and GET /random on entity=poem op=list have the same selector (exist: none), so only GET /poems is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "poem"
+  op: "list"
+  points: [
+    "GET /poems"
+    "GET /random"
+  ]
+
+}

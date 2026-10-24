@@ -12,6 +12,8 @@ type BleachPoemsError struct {
 	Ctx    *Context `json:"-"`
 	Result any
 	Spec   any
+	// The HTTP status, -1 when there was no response.
+	Status int
 }
 
 func NewBleachPoemsError(code string, msg string, ctx *Context) *BleachPoemsError {
@@ -21,7 +23,12 @@ func NewBleachPoemsError(code string, msg string, ctx *Context) *BleachPoemsErro
 		Code:               code,
 		Msg:                msg,
 		Ctx:                ctx,
+		Status:             -1,
 	}
+}
+
+func (e *BleachPoemsError) NotFound() bool {
+	return 404 == e.Status
 }
 
 func (e *BleachPoemsError) Error() string {
@@ -35,6 +42,7 @@ func (e *BleachPoemsError) Record() map[string]any {
 		"sdk":     e.Sdk,
 		"code":    e.Code,
 		"message": e.Msg,
+		"status":  e.Status,
 		"result":  e.Result,
 		"spec":    e.Spec,
 	}

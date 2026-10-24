@@ -52,6 +52,10 @@ main: kit: entity: poem: {
           }
           m: "GET"
           o: "/poems"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "poems"
@@ -70,6 +74,10 @@ main: kit: entity: poem: {
           }
           m: "GET"
           o: "/random"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "random"
@@ -114,6 +122,10 @@ main: kit: entity: poem: {
             param: {
               volume: "id"
             }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
